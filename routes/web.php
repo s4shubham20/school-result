@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,5 @@ Route::get('/', function () {
 Auth::routes(['register' => false]);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function () {
    Route::resource('dashboard', AdminController::class);;
+   Route::resource('student', StudentController::class);;
 });

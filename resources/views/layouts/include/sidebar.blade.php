@@ -13,34 +13,40 @@
     <ul class="metismenu" id="menu">
         <li>
             <a href="{{ route('dashboard.index') }}" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-home'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-spa'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-spa'></i>
                 </div>
-                <div class="menu-title">Application</div>
+                <div class="menu-title">Student</div>
             </a>
             <ul>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
+                <li>
+                    <a href="{{ route('student.create') }}">
+                        <i class="bx bx-right-arrow-circle"></i>
+                        Add Student
+                    </a>
                 </li>
-                <li> <a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Sales</a>
-                </li>
-                <li> <a href="index3.html"><i class="bx bx-right-arrow-alt"></i>eCommerce</a>
-                </li>
-                <li> <a href="index4.html"><i class="bx bx-right-arrow-alt"></i>Alternate</a>
-                </li>
-                <li> <a href="index5.html"><i class="bx bx-right-arrow-alt"></i>Hospitality</a>
+                <li>
+                    <a href="{{ route('student.index') }}">
+                        <i class="bx bx-right-arrow-circle"></i>
+                        View Student
+                    </a>
                 </li>
             </ul>
         </li>
         <li>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('form').submit();" class="nav-link">
-                <div class="parent-icon"><i class="bx bx-log-out"></i></div>
+                <div class="parent-icon">
+                    <i class="bx bx-log-out"></i>
+                </div>
                 <span class="menu-title">Logout</span>
             </a>
             <form class="d-none" action="{{ route('logout') }}" method="post" id="form">
