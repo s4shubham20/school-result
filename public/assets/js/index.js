@@ -79,7 +79,7 @@ var options = {
         }
     }
 };
-var chart = new ApexCharts(document.querySelector("#chart1"), options);
+/*var chart = new ApexCharts(document.querySelector("#chart1"), options);
 chart.render();
 
 
@@ -461,7 +461,7 @@ var options = {
             endingShape: 'rounded'
         },
     },
-    
+
     dataLabels: {
         enabled: false
     },
@@ -499,7 +499,7 @@ var options = {
     xaxis: {
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
     },
-    
+
     tooltip: {
         theme: 'dark',
         y: {
@@ -1047,7 +1047,7 @@ chart.render();
 				drilldown: "Others"
 			}]
 		}],
-		
+
 	});
 
 
@@ -1123,13 +1123,13 @@ chart.render();
 				//drilldown: "Others"
 			}]
 		}],
-		
+
 	});
 
-
+*/
 
  // world map
-	
+
  jQuery('#geographic-map').vectorMap({
     map: 'world_mill_en',
     backgroundColor: 'transparent',

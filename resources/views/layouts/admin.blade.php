@@ -53,12 +53,20 @@
 <script src="{{ asset('assets/plugins/highcharts/js/variable-pie.js') }}"></script>
 <script src="{{ asset('assets/plugins/highcharts/js/export-data.js') }}"></script>
 <script src="{{ asset('assets/plugins/highcharts/js/accessibility.js') }}"></script>
-<script src="{{ asset('assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
-<script>
-    new PerfectScrollbar('.dashboard-top-countries');
-</script>
 <script src="{{ asset('assets/js/index.js') }}"></script>
 <!--app JS-->
 <script src="{{ asset('assets/js/app.js') }}"></script>
+<script>
+    const deleteButton = document.getElementById("deleteAlert");
+    deleteButton.addEventListener("click", function(event) {
+        if (!deleteConfirmation()) {
+            event.preventDefault();
+        }
+    });
+    function deleteConfirmation() {
+        let result =  confirm("Are you sure you want to delete this item?");
+        return result;
+    }
+</script>
 </body>
 </html>

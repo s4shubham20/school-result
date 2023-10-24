@@ -40,11 +40,10 @@
                                             <td>
                                                 <div class="d-flex">
                                                     <a href="{{ route('student.edit',Crypt::encrypt($item->id)) }}" class="btn btn-info text-light"><i class="bx bx-edit"></i></a>
-                                                    <a href="{{ route('result.show',Crypt::encrypt($item->id)) }}" class="btn btn-primary mx-2"><i class="lni lni-printer"></i></a>
                                                     <form action="{{ route('student.destroy',Crypt::encrypt($item->id)) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="btn btn-danger" id="deleteAlert"><i class="bx bx-trash"></i></button>
+                                                        <button class="btn btn-danger ms-2" id="deleteAlert"><i class="bx bx-trash"></i></button>
                                                     </form>
                                                 </div>
                                             </td>

@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PDFController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +25,9 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function () {
-   Route::resource('dashboard', AdminController::class);;
-   Route::resource('student', StudentController::class);;
+   Route::resource('dashboard', AdminController::class);
+   Route::resource('student', StudentController::class);
+   Route::resource('subject', SubjectController::class);
+   Route::resource('result', ResultController::class);
+   Route::get('view/result/{id}', [PDFController::class, 'generatePDF'])->name('print.result');
 });

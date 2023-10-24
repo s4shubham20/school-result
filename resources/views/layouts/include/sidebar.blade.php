@@ -42,6 +42,44 @@
             </ul>
         </li>
         <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-spa'></i>
+                </div>
+                <div class="menu-title">Subject</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('subject.create') }}">
+                        <i class="bx bx-right-arrow-circle"></i>
+                        Add Subject
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('subject.index') }}">
+                        <i class="bx bx-right-arrow-circle"></i>
+                        View Subject
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-spa'></i>
+                </div>
+                <div class="menu-title">Result</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('result.index') }}">
+                        <i class="bx bx-right-arrow-circle"></i>
+                        View Marks
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('form').submit();" class="nav-link">
                 <div class="parent-icon">

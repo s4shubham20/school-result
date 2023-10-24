@@ -15,5 +15,4 @@
             </div>
         </div>
     </div>
-    <!-- Mirrored from codervent.com/synadmin/demo/vertical/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Oct 2023 17:38:06 GMT -->
 @endsection
