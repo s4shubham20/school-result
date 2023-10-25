@@ -56,6 +56,9 @@
 <script src="{{ asset('assets/js/index.js') }}"></script>
 <!--app JS-->
 <script src="{{ asset('assets/js/app.js') }}"></script>
+@section('js')
+
+@show
 <script>
     const deleteButton = document.getElementById("deleteAlert");
     deleteButton.addEventListener("click", function(event) {

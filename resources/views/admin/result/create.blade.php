@@ -19,7 +19,8 @@
                                     <h5 class="text-center text-info opacity-100">असतो मा सदगमय || तमसो मा ज्योतिर्गमय ||</h5>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-5"></div>
+                                    <div class="col-md-5">
+                                    </div>
                                     <div class="col-md-7 d-flex justify-content-between align-items-center">
                                         <div>
                                             <img src="{{ asset('assets/images/result-icon/result-icon.png') }}" alt="" class="img-fluid"/>
@@ -176,4 +177,18 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+<script>
+    const grandTotal = (key) => {
+        let subTotal = document.querySelectorAll(".subTotal");
+        let grandTotal = document.querySelector("#grandTotal");
+        let value = 0;
+        subTotal.forEach(element => {
+            value = parseInt(element.innerHTML)+value;
+            grandTotal.innerHTML = value;
+        });
+    }
+    grandTotal();
+</script>
 @endsection
