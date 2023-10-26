@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::latest('id')->get();
         return view("admin.student.index", compact("students"));
     }
 

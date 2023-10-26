@@ -61,14 +61,17 @@
 @show
 <script>
     const deleteButton = document.getElementById("deleteAlert");
-    deleteButton.addEventListener("click", function(event) {
-        if (!deleteConfirmation()) {
-            event.preventDefault();
+    if(deleteButton){
+
+        deleteButton.addEventListener("click", function(event) {
+            if (!deleteConfirmation()) {
+                event.preventDefault();
+            }
+        });
+        function deleteConfirmation() {
+            let result =  confirm("Are you sure you want to delete this item?");
+            return result;
         }
-    });
-    function deleteConfirmation() {
-        let result =  confirm("Are you sure you want to delete this item?");
-        return result;
     }
 </script>
 </body>

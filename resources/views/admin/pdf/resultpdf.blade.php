@@ -117,10 +117,8 @@
                                         @php
                                             $grandTotal = 0;
                                             $rank = 1;
-                                            $prevMarks = null;
                                         @endphp
                                         @foreach($marks as $key => $item)
-
                                         @php
                                             $grandTotal += $item->semester1 + $item->semester2;
                                         @endphp
@@ -135,11 +133,6 @@
                                             <td style="text-align:right; padding-right: 12px; font-weight: 700" colspan="3">Grand Total</td>
                                             <td style="border: 1px solid black; text-align:center; font-weight: 700" id="grandTotal">{{ $grandTotal }}</td>
                                         </tr>
-                                        @php
-                                            if ($prevMarks !== null && $grandTotal !== $prevMarks) {
-                                                $rank+=1;
-                                            }
-                                        @endphp
                                     </tbody>
                                 </table>
                                 <div class="my-3">

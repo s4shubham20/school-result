@@ -32,7 +32,20 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="class" class="form-label">Student Class<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('class') is-invalid @enderror" name="class" id="class" placeholder="Enter class here!" value="{{ old('class',$student->class) }}"/>
+                                <select name="class" id="class" class="form-select @error('class') is-invalid @enderror">
+                                    <option value="1" {{ old('class', $student->class) == 1 ? "selected":"" }}>1st</option>
+                                    <option value="2" {{ old('class', $student->class) == 2 ? "selected":"" }}>2nd</option>
+                                    <option value="3" {{ old('class', $student->class) == 3 ? "selected":"" }}>3rd</option>
+                                    <option value="4" {{ old('class', $student->class) == 4 ? "selected":"" }}>4th</option>
+                                    <option value="5" {{ old('class', $student->class) == 5 ? "selected":"" }}>5th</option>
+                                    <option value="6" {{ old('class', $student->class) == 6 ? "selected":"" }}>6th</option>
+                                    <option value="7" {{ old('class', $student->class) == 7 ? "selected":"" }}>7th</option>
+                                    <option value="8" {{ old('class', $student->class) == 8 ? "selected":"" }}>8th</option>
+                                    <option value="9" {{ old('class', $student->class) == 9 ? "selected":"" }}>9th</option>
+                                    <option value="10" {{ old('class', $student->class) == 10 ? "selected":"" }}>10th</option>
+                                    <option value="11" {{ old('class', $student->class) == 11 ? "selected":"" }}>11th</option>
+                                    <option value="12" {{ old('class', $student->class) == 12 ? "selected":"" }}>12th</option>
+                                </select>
                                 @error('class')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

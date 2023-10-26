@@ -30,12 +30,35 @@ class ResultController extends Controller
      */
     public function store(Request $request)
     {
+        return Mark::where('student_id',$request->student_id)->with('student')->get();
         $request->validate([
             'subject_id.*'  => 'required',
-            'semester1.*'   => 'required|max:100',
-            'semester2.*'   => 'required',
+            'semester1.*'   => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_numeric($value) && !is_string($value)) {
+                        $fail("$attribute must be a positive number or a string.");
+                    } elseif (is_numeric($value) && ($value < 0)) {
+                        $fail("$attribute must be a positive number.");
+                    } elseif (is_numeric($value) && ($value > 100)) {
+                        $fail("$attribute must not be greater than 100.");
+                    }
+                }
+            ],
+            'semester2.*'   => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_numeric($value) && !is_string($value)) {
+                        $fail("$attribute must be a positive number or a string.");
+                    } elseif (is_numeric($value) && ($value < 0)) {
+                        $fail("$attribute must be a positive number.");
+                    } elseif (is_numeric($value) && ($value > 100)) {
+                        $fail("$attribute must not be greater than 100.");
+                    }
+                }
+            ],
         ]);
-        $marks = Mark::where('student_id',$request->student_id)->count();
+        $marks = Mark::where('student_id',$request->student_id)->with('student')->count();
         if($marks > 0){
             Mark::where('student_id',$request->student_id)->delete();
         }

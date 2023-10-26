@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->string('semester1')->nullable();
             $table->string('semester2')->nullable();
+            $table->string('periodic_test1')->nullable();
+            $table->string('periodic_test2')->nullable();
             $table->foreign('student_id')
             ->references('id')->on('students')
             ->onDelete('cascade');

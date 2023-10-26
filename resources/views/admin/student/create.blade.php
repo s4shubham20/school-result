@@ -31,7 +31,20 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="class" class="form-label">Student Class<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('class') is-invalid @enderror" name="class" id="class" placeholder="Enter class here!" value="{{ old('class') }}"/>
+                                <select name="class" id="class" class="form-select @error('class') is-invalid @enderror">
+                                    <option value="1" {{ old('class') == 1 ? "selected":"" }}>1st</option>
+                                    <option value="2" {{ old('class') == 2 ? "selected":"" }}>2nd</option>
+                                    <option value="3" {{ old('class') == 3 ? "selected":"" }}>3rd</option>
+                                    <option value="4" {{ old('class') == 4 ? "selected":"" }}>4th</option>
+                                    <option value="5" {{ old('class') == 5 ? "selected":"" }}>5th</option>
+                                    <option value="6" {{ old('class') == 6 ? "selected":"" }}>6th</option>
+                                    <option value="7" {{ old('class') == 7 ? "selected":"" }}>7th</option>
+                                    <option value="8" {{ old('class') == 8 ? "selected":"" }}>8th</option>
+                                    <option value="9" {{ old('class') == 9 ? "selected":"" }}>9th</option>
+                                    <option value="10" {{ old('class') == 10 ? "selected":"" }}>10th</option>
+                                    <option value="11" {{ old('class') == 11 ? "selected":"" }}>11th</option>
+                                    <option value="12" {{ old('class') == 12 ? "selected":"" }}>12th</option>
+                                </select>
                                 @error('class')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
