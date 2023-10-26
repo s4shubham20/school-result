@@ -30,4 +30,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
    Route::resource('subject', SubjectController::class);
    Route::resource('result', ResultController::class);
    Route::get('view/result/{id}', [PDFController::class, 'generatePDF'])->name('print.result');
+   Route::get('/fee/student',[StudentController::class, 'feePayment'])->name('student.fee');
 });

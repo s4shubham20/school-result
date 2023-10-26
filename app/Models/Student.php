@@ -18,6 +18,7 @@ class Student extends Model
         "father_name",
         "mother_name",
         "dob",
+        "course_fee",
         "address"
     ];
 

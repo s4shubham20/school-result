@@ -32,7 +32,7 @@ class ResultController extends Controller
     {
         $request->validate([
             'subject_id.*'  => 'required',
-            'semester1.*'   => 'required',
+            'semester1.*'   => 'required|max:100',
             'semester2.*'   => 'required',
         ]);
         $marks = Mark::where('student_id',$request->student_id)->count();

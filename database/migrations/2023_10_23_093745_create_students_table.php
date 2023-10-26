@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->date('dob');
             $table->string('profile_pic')->nullable();
+            $table->float('course_fee')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

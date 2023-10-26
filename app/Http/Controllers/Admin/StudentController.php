@@ -39,6 +39,7 @@ class StudentController extends Controller
             "father_name"   => "required",
             "mother_name"   => "required",
             "dob"           => "required",
+            "course_fee"    => "required|numeric|gt:0",
             "address"       => "required",
         ]);
         Student::create($request->all());
@@ -77,6 +78,7 @@ class StudentController extends Controller
             "father_name"   => "required",
             "mother_name"   => "required",
             "dob"           => "required",
+            "course_fee"    => "required|numeric|gt:0",
             "address"       => "required",
         ]);
         $student->update($request->all());
@@ -91,5 +93,10 @@ class StudentController extends Controller
         $id      = Crypt::decrypt($eid);
         Student::destroy($id);
         return redirect()->route("student.index")->with("success","Student has been successfully deleted!");
+    }
+
+    public function feePayment()
+    {
+        return view('admin.student.fee');
     }
 }

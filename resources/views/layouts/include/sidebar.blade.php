@@ -64,20 +64,12 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="has-arrow">
+            <a href="{{ route('student.fee') }}">
                 <div class="parent-icon">
-                    <i class='bx bx-spa'></i>
+                    <i class='bx bx-rupee'></i>
                 </div>
-                <div class="menu-title">Result</div>
+                <div class="menu-title">Fee</div>
             </a>
-            <ul>
-                <li>
-                    <a href="{{ route('result.index') }}">
-                        <i class="bx bx-right-arrow-circle"></i>
-                        View Marks
-                    </a>
-                </li>
-            </ul>
         </li>
         <li>
             <a href="{{ route('logout') }}"

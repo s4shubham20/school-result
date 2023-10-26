@@ -65,6 +65,13 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
+                                <label for="course_fee" class="form-label">Course Fee<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('course_fee') is-invalid @enderror" id="course_fee" name="course_fee" value="{{ old('course_fee') }}" placeholder="Enter course fee of student!"/>
+                                @error('course_fee')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
                                 <label for="address" class="form-label">Address<span class="text-danger fs-4">*</span></label>
                                 <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter address here!">{{ old('address') }}</textarea>
                                 @error('address')
