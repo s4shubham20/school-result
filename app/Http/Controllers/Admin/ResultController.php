@@ -30,10 +30,15 @@ class ResultController extends Controller
      */
     public function store(Request $request)
     {
-        return Mark::where('student_id',$request->student_id)->with('student')->get();
+        $student = Student::findOrFail($request->student_id);
         $request->validate([
-            'subject_id.*'  => 'required',
-            'semester1.*'   => [
+            'subject_id'                    => 'required',
+            'attendance'                    => 'required',
+            'sports_cultural_activities'    => 'required',
+            'punctual_activities'           => 'required',
+            'holiday_assignment'            => 'required',
+            'subject_id.*'                  => 'required',
+            'semester1.*'                   => [
                 'required',
                 function ($attribute, $value, $fail) {
                     if (!is_numeric($value) && !is_string($value)) {
@@ -57,6 +62,30 @@ class ResultController extends Controller
                     }
                 }
             ],
+            'periodic_test1.*'    => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_numeric($value) && !is_string($value)) {
+                        $fail("$attribute must be a positive number or a string.");
+                    } elseif (is_numeric($value) && ($value < 0)) {
+                        $fail("$attribute must be a positive number.");
+                    } elseif (is_numeric($value) && ($value > 100)) {
+                        $fail("$attribute must not be greater than 100.");
+                    }
+                }
+            ],
+            'periodic_test2.*'    => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_numeric($value) && !is_string($value)) {
+                        $fail("$attribute must be a positive number or a string.");
+                    } elseif (is_numeric($value) && ($value < 0)) {
+                        $fail("$attribute must be a positive number.");
+                    } elseif (is_numeric($value) && ($value > 100)) {
+                        $fail("$attribute must not be greater than 100.");
+                    }
+                }
+            ]
         ]);
         $marks = Mark::where('student_id',$request->student_id)->with('student')->count();
         if($marks > 0){
@@ -65,13 +94,22 @@ class ResultController extends Controller
 
         foreach($request->subject_id as $key => $subjectId){
             Mark::create([
-                'student_id'    => $request->student_id,
-                'subject_id'    => $subjectId,
-                'semester1'     => $request->semester1[$key],
-                'semester2'     => $request->semester2[$key],
+                'student_id'         => $request->student_id,
+                'subject_id'         => $subjectId,
+                'semester1'          => $request->semester1[$key],
+                'semester2'          => $request->semester2[$key],
+                'periodic_test1'     => $request->periodic_test1[$key],
+                'periodic_test2'     => $request->periodic_test2[$key],
             ]);
         }
-        return redirect(route('result.index'))->with('success', 'You have successfully add marks!');
+        $student->attendance                    = $request->attendance;
+        $student->sports_cultural_activities    = $request->sports_cultural_activities;
+        $student->punctual_activities           = $request->punctual_activities;
+        $student->holiday_assignment            = $request->holiday_assignment;
+        $student->totalmarks                    = $request->totalmarks;
+        $student->remarks                       = $request->remarks;
+        $student->save();
+        return redirect()->back()->with('success', 'You have successfully add marks!');
 
     }
 

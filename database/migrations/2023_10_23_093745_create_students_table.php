@@ -23,7 +23,14 @@ return new class extends Migration
             $table->date('dob');
             $table->string('profile_pic')->nullable();
             $table->float('course_fee')->nullable();
-            $table->timestamps();
+            $table->integer('totalmarks')->nullable();
+            $table->integer('rank_in_class')->nullable();
+            $table->integer('attendance')->nullable();
+            $table->string('remarks',600)->nullable();
+            $table->string('sports_cultural_activities')->nullable();
+            $table->string('punctual_activities')->nullable();
+            $table->string('holiday_assignment')->nullable();
+            $table->timestamps('');
             $table->softDeletes();
         });
     }

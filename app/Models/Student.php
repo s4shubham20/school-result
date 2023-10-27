@@ -19,7 +19,13 @@ class Student extends Model
         "mother_name",
         "dob",
         "course_fee",
-        "address"
+        "address",
+        'attendance',
+        'sports_cultural_activities',
+        'punctual_activities',
+        'holiday_assignment',
+        'totalmarks',
+        'remarks'
     ];
 
     public function marks()

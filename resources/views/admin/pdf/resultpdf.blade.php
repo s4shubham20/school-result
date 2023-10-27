@@ -145,7 +145,7 @@
                                         <td class="border-1 ps-1" colspan="2">Class Rank</td>
                                         <td class="border-1 text-center">{{ $rank }}</td>
                                     </tr>
-                                    <tr style="width: 100%">
+                                    <tr style="width: 100%" class="border-1">
                                         <td class="border-1" style="width: 33%; height: 80px;">
                                             <table>
                                                 <tr>

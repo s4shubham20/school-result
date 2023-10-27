@@ -14,6 +14,8 @@ class Mark extends Model
         'subject_id',
         'semester1',
         'semester2',
+        'periodic_test1',
+        'periodic_test2'
     ];
 
     public function student()

@@ -12,7 +12,7 @@ class PDFController extends Controller
 {
     public function generatePDF($eid)
     {
-        $id = Crypt::decrypt($eid);
+        $id         =   Crypt::decrypt($eid);
         $student    =   Student::findOrFail($id);
         $marks      =   Mark::with('student')->where('student_id',$id)->get();
         $pdf        =   pdf::loadView('admin.pdf.resultpdf', ['student' => $student,'marks' => $marks]);
