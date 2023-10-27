@@ -108,30 +108,48 @@
                                     <thead>
                                         <tr style="border: 1px solid black;">
                                             <th style="border: 1px solid black; padding-left: 5px;">Subject</th>
+                                            <th style="border: 1px solid black; text-align:center;">PA 1</th>
                                             <th style="border: 1px solid black; text-align:center;">SA 1</th>
+                                            <th style="border: 1px solid black; text-align:center;">PA 2</th>
                                             <th style="border: 1px solid black; text-align:center;">SA 2</th>
                                             <th style="border: 1px solid black; text-align:center;">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php
-                                            $grandTotal = 0;
+                                            $grandTotal = '';
                                             $rank = 1;
+                                            $periodicTest1 = 0;
+                                            $periodicTest2 = 0;
+                                            $semester1 = 0;
+                                            $semester2 = 0;
+                                            $subjectCount = 0;
                                         @endphp
                                         @foreach($marks as $key => $item)
                                         @php
-                                            $grandTotal += $item->semester1 + $item->semester2;
+                                            $periodicTest1 += $item->periodic_test1;
+                                            $periodicTest2 += $item->periodic_test2;
+                                            $semester1 += $item->semester1;
+                                            $semester2 += $item->semester2;
+                                            $grandTotal = $periodicTest1 + $periodicTest2 + $semester1 + $semester2;
+                                            // $subjectCount = count($subjects->toArray());
                                         @endphp
-                                        <tr style="border: 1px solid black;">
-                                            <td style="border: 1px solid black; padding-left: 5px;">{{ $item->subject->subject_name }}</td>
-                                            <td style="border: 1px solid black; text-align:center;">{{ $item->semester1 }}</td>
-                                            <td style="border: 1px solid black; text-align:center;">{{ $item->semester2 }}</td>
-                                            <td style="border: 1px solid black; text-align:center;" class="subTotal">{{ $item->semester1 + $item->semester2 }}</td>
+                                        <tr class="border-1">
+                                            <td class="border-1 ps-1">{{ $item->subject->subject_name }}</td>
+                                            <td class="border-1 text-center">{{ $item->periodic_test1 }}</td>
+                                            <td class="border-1 text-center">{{ $item->semester1 }}</td>
+                                            <td class="border-1 text-center">{{ $item->periodic_test2 }}</td>
+                                            <td class="border-1 text-center">{{ $item->semester2 }}</td>
+                                            <td class="border-1 text-center">{{ $item->semester1 + $item->semester2 }}</td>
                                         </tr>
                                         @endforeach
                                         <tr>
-                                            <td style="text-align:right; padding-right: 12px; font-weight: 700" colspan="3">Grand Total</td>
-                                            <td style="border: 1px solid black; text-align:center; font-weight: 700" id="grandTotal">{{ $grandTotal }}</td>
+                                            <td class="border-1 fw-bold">Grand Total</td>
+                                            <td class="border-1 fw-bold text-center">{{ $periodicTest1== 0 ?"":$periodicTest1 }}</td>
+                                            <td class="border-1 fw-bold text-center">{{ $semester1== 0 ?"":$semester1 }}</td>
+                                            <td class="border-1 fw-bold text-center">{{ $periodicTest2 == 0 ?"":$periodicTest2 }}</td>
+                                            <td class="border-1 fw-bold text-center">{{ $semester2== 0 ?"":$semester2 }}</td>
+                                            <td class="border-1 fw-bold text-center" id="grandTotal">{{ $grandTotal }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -142,32 +160,33 @@
                                 </div>
                                 <table class="table">
                                     <tr style="width: 100%">
-                                        <td class="border-1 ps-1" colspan="2">Class Rank</td>
-                                        <td class="border-1 text-center">{{ $rank }}</td>
+                                        <td class="border-1 ps-1" colspan="3">Class Rank</td>
+                                        <td class="border-1 text-center" colspan="1">{{ $rank }}</td>
                                     </tr>
-                                    <tr style="width: 100%" class="border-1">
-                                        <td class="border-1" style="width: 33%; height: 80px;">
-                                            <table>
-                                                <tr>
-                                                    <td>Sports & Cultural Activities</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Punctual Activities</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Holiday Assignment</td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                        <td class="border-1" style="width: 33%; height: 80px;"></td>
-                                        <td class="border-1" style="width: 33%; height: 80px;"></td>
+                                    <tr class="border-1">
+                                        <td class="border-1 w-50 ps-1" colspan="3">Sports & Cultural Activities</td>
+                                        <td class="border-1 text-center">{{ $student->sports_cultural_activities }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-1 w-50 ps-1" colspan="3">Punctual Activities</td>
+                                        <td class="border-1 text-center" >{{ $student->punctual_activities }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-1 w-50 ps-1" colspan="3">Holiday Assignment</td>
+                                        <td class="border-1 text-center">{{ $student->holiday_assignment }}</td>
                                     </tr>
                                     <tr style="width: 100%">
-                                        <td class="border-1 ps-1" colspan="2">Result</td>
+                                        <td class="border-1 w-50 ps-1">Attendance</td>
+                                        <td class="border-1 text-center">{{ $student->attendance }}12</td>
+                                        <td class="border-1">Percentage</td>
+                                        <td class="border-1">{{  $subjectCount }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-1 ps-1" colspan="3">Result</td>
                                         <td class="border-1 text-center">Passed</td>
                                     </tr>
                                     <tr style="width: 100%;">
-                                        <td style="width: 33%;" colspan="3">
+                                        <td style="width: 33%;" colspan="4">
                                             <table>
                                                 <tr>
                                                     <td>Issue Date:</td>
