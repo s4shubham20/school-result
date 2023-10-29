@@ -64,7 +64,7 @@
             </ul>
         </li>
         <li>
-            <a href="{{ route('student.fee') }}">
+            <a href="{{ route('student.fee.view') }}">
                 <div class="parent-icon">
                     <i class='bx bx-rupee'></i>
                 </div>

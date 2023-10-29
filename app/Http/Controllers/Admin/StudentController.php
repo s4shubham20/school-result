@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Student;
+use App\Models\{Student,Fee};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
@@ -14,8 +14,14 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::latest('id')->get();
-        return view("admin.student.index", compact("students"));
+        $students = Student::latest('rank_in_class')->get();
+        $rank = 1;
+        foreach($students as $key => $student){
+            $student->rank_in_class = $rank;
+            $student->save();
+            $rank++;
+        }
+        return view('admin.student.index', compact("students"));
     }
 
     /**
@@ -95,8 +101,51 @@ class StudentController extends Controller
         return redirect()->route("student.index")->with("success","Student has been successfully deleted!");
     }
 
-    public function feePayment()
+    public function getFee()
     {
-        return view('admin.student.fee');
+        $students = Student::with(['fee' => function($query){
+            $query->latest('id');
+        }])->latest()->get();
+        return view('admin.student.fee', compact('students'));
     }
+
+    public function studentFeeDetails($eid)
+    {
+        $id = Crypt::decrypt($eid);
+        $student = Student::with([
+            'fee' => function($query){
+            $query->latest('id');
+        }])->findOrFail($id);
+        return view('admin.student.fee-receipt', compact('student'));
+    }
+
+    public function feePayment(Request $request)
+    {
+        $request->validate([
+            'student_id'        =>  'required',
+            'admission_no'      =>  'sometimes|required',
+            'amount'            =>  'required|numeric|gt:0',
+            'payment_mode'      =>  'required'
+        ]);
+
+        $fee = Fee::latest('id')->first();
+        if ($fee) {
+            $receiptNo = ($fee->receipt_no)+1;
+        }else{
+            $receiptNo = '10000';
+        }
+        $studentId = Crypt::decrypt($request->student_id);
+        Fee::create([
+            'receipt_no'    =>  $receiptNo,
+            'payment_mode'  =>  $request->payment_mode,
+            'student_id'    =>  $studentId,
+            'admission_no'  =>  $request->admission_no,
+            'amount'        =>  $request->amount,
+        ]);
+
+        return redirect()
+            ->route("student.fee.view")
+        ->with("success","Fee amount successfully paid!");
+    }
+
 }

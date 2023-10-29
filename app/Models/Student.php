@@ -33,8 +33,9 @@ class Student extends Model
         return $this->hasMany(Mark::class);
     }
 
-    public function subjects()
+    public function fee()
     {
-        return $this->belongsToMany(Subject::class, 'marks', 'student_id', 'subject_id');
+        return $this->hasMany(Fee::class);
     }
+
 }

@@ -26,8 +26,8 @@
                                 </div>
                                 <table style="width: 100%;" class="my-4">
                                     <tr>
-                                        <td style="width: 37%;"></td>
-                                        <td style="width: 63%;">
+                                        <td style="width: 39%;"></td>
+                                        <td style="width: 61%;">
                                             <table style="width: 100%;">
                                                 <tr>
                                                     <td style="width: 50%;">
@@ -51,29 +51,29 @@
                                     <h3 class="text-uppercase mb-0 text-center text-color opacity-100">Progress Report Session {{ date('Y') }}-{{ \Carbon\Carbon::now()->addYear(1)->format('Y') }}</h3>
                                     <hr class="fs-4 mt-0 mb-1 border-2 text-color opacity-75">
                                 </div>
-                                <table style="width: 100%;" class="my-4">
+                                <table style="width: 100%;" class="mt-4">
                                     <tr style="min-width:100%">
                                         <td style="width: 58%; vertical-align: top;">
                                             <table style="width: 100%;">
                                                 <tr style="vertical-align: top;">
-                                                    <td style="width: 30%; height: 20px;">Name</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
+                                                    <td style="width: 30%; height: 20px;" class="fw-bold">Name</td>
+                                                    <td style="width: 10%; height: 20px;" class="fw-bold">:</td>
                                                     <td style="width: 60%; height: 20px;">{{ $student->name }}</td>
                                                 </tr>
                                                 <tr style="vertical-align: top;">
-                                                    <td style="width: 30%; height: 20px;">Father Name</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
+                                                    <td style="width: 30%; height: 20px;" class="fw-bold">Father Name</td>
+                                                    <td style="width: 10%; height: 20px;" class="fw-bold">:</td>
                                                     <td style="width: 60%; height: 20px;">{{ $student->father_name }}</td>
                                                 </tr>
                                                 <tr style="vertical-align: top;">
-                                                    <td style="width: 30%; height: 20px;">Mother Name</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
+                                                    <td style="width: 30%; height: 20px;" class="fw-bold">Mother Name</td>
+                                                    <td style="width: 10%; height: 20px;" class="fw-bold">:</td>
                                                     <td style="width: 60%; height: 20px;">{{ $student->mother_name }}</td>
                                                 </tr>
                                                 <tr style="vertical-align: top;">
-                                                    <td style="width: 30%; height: 20px;">Address</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
-                                                    <td style="width: 60%; height: 20px;">{{ $student->address }}</td>
+                                                    <td style="width: 30%; height: 20px;" class="fw-bold">Roll No.</td>
+                                                    <td style="width: 10%; height: 20px;" class="fw-bold">:</td>
+                                                    <td style="width: 60%; height: 20px;">{{ $student->roll_no }}</td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -81,27 +81,29 @@
                                         <td style="width: 40%; vertical-align: top;">
                                             <table style="width: 100%;">
                                                 <tr style="vertical-align: top;">
-                                                    <td style="width: 40%; height: 20px;">Class</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
+                                                    <td style="width: 40%; height: 20px;" class="fw-bold">Class</td>
+                                                    <td style="width: 10%; height: 20px;" class="fw-bold">:</td>
                                                     <td style="width: 50%; height: 20px;">{{ $student->class }}</td>
                                                 </tr>
                                                 <tr style="vertical-align: top;">
-                                                    <td style="width: 40%; height: 20px;">Admission No</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
+                                                    <td style="width: 40%; height: 20px;" class="fw-bold">Admission No</td>
+                                                    <td style="width: 10%; height: 20px;" class="fw-bold">:</td>
                                                     <td style="width: 50%; height: 20px;">{{ $student->admission_no }}</td>
                                                 </tr>
                                                 <tr style="vertical-align: top;">
-                                                    <td style="width: 40%; height: 20px;">DOB</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
+                                                    <td style="width: 40%; height: 20px;" class="fw-bold">DOB</td>
+                                                    <td style="width: 10%; height: 20px;" class="fw-bold">:</td>
                                                     <td style="width: 50%; height: 20px;">{{ date('d-M-Y',strtotime($student->dob)) }}</td>
-                                                </tr>
-                                                <tr style="vertical-align: top;">
-                                                    <td style="width: 40%; height: 20px;">Roll No</td>
-                                                    <td style="width: 10%; height: 20px;">:</td>
-                                                    <td style="width: 50%; height: 20px;">{{ $student->roll_no }}</td>
                                                 </tr>
                                             </table>
                                         </td>
+                                    </tr>
+                                </table>
+                                <table style="width: 100%;" class="mb-3">
+                                    <tr style="vertical-align: top;">
+                                        <td style="width: 17%; height: 20px;" class="fw-bold">Address</td>
+                                        <td style="width: 6%; height: 20px;" class="ms-5 fw-bold">:</td>
+                                        <td style="width: 76%; height: 20px;">{{ $student->address }}</td>
                                     </tr>
                                 </table>
                                 <table style="border: 1px solid black; width:100%;">
@@ -118,21 +120,35 @@
                                     <tbody>
                                         @php
                                             $grandTotal = '';
-                                            $rank = 1;
                                             $periodicTest1 = 0;
                                             $periodicTest2 = 0;
                                             $semester1 = 0;
                                             $semester2 = 0;
                                             $subjectCount = 0;
-                                        @endphp
+                                            @endphp
                                         @foreach($marks as $key => $item)
                                         @php
-                                            $periodicTest1 += $item->periodic_test1;
-                                            $periodicTest2 += $item->periodic_test2;
-                                            $semester1 += $item->semester1;
-                                            $semester2 += $item->semester2;
+                                            if(is_numeric($item->periodic_test1)){
+                                                $periodicTest1 += $item->periodic_test1;
+                                            }else{
+                                                $periodicTest1 += 0;
+                                            }
+                                            if(is_numeric($item->periodic_test2)){
+                                                $periodicTest2 += $item->periodic_test2;
+                                            }else{
+                                                $periodicTest2 += 0;
+                                            }
+                                            if(is_numeric($item->semester1)){
+                                                $semester1 += $item->semester1;
+                                            }else{
+                                                $semester1 += 0;
+                                            }
+                                            if(is_numeric($item->semester2)){
+                                                $semester2 += $item->semester2;
+                                            }else{
+                                                $semester2 += 0;
+                                            }
                                             $grandTotal = $periodicTest1 + $periodicTest2 + $semester1 + $semester2;
-                                            // $subjectCount = count($subjects->toArray());
                                         @endphp
                                         <tr class="border-1">
                                             <td class="border-1 ps-1">{{ $item->subject->subject_name }}</td>
@@ -161,7 +177,7 @@
                                 <table class="table">
                                     <tr style="width: 100%">
                                         <td class="border-1 ps-1" colspan="3">Class Rank</td>
-                                        <td class="border-1 text-center" colspan="1">{{ $rank }}</td>
+                                        <td class="border-1 text-center" colspan="1">{{ $student->rank_in_class ?? 'NA' }}</td>
                                     </tr>
                                     <tr class="border-1">
                                         <td class="border-1 w-50 ps-1" colspan="3">Sports & Cultural Activities</td>
@@ -177,9 +193,13 @@
                                     </tr>
                                     <tr style="width: 100%">
                                         <td class="border-1 w-50 ps-1">Attendance</td>
-                                        <td class="border-1 text-center">{{ $student->attendance }}12</td>
-                                        <td class="border-1">Percentage</td>
-                                        <td class="border-1">{{  $subjectCount }}</td>
+                                        <td class="border-1 text-center">{{ $student->attendance }}</td>
+                                        <td class="border-1 ps-1">Percentage</td>
+                                        @php
+                                            $subjectCount = count($subjects)*2;
+                                            $percentage = $grandTotal/$subjectCount;
+                                        @endphp
+                                        <td class="border-1 text-center">{{ round($percentage, 2)  }}</td>
                                     </tr>
                                     <tr>
                                         <td class="border-1 ps-1" colspan="3">Result</td>
@@ -195,13 +215,15 @@
                                             </table>
                                         </td>
                                     </tr>
+                                </table>
+                                <table  class="table m-0 mb-1">
                                     <tr style="width: 100%;">
                                         <td>Class Teacher</td>
-                                        <td class="text-center">Principle</td>
+                                        <td>Principle</td>
                                         <td class="text-center">Parent</td>
                                     </tr>
                                 </table>
-                                <hr class="fs-4 m-0 mt-4 border-2 text-color opacity-75">
+                                <hr class="fs-4 m-0 mt-2 border-2 text-color opacity-75">
                             </div>
                         </div>
                     </div>

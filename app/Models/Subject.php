@@ -12,9 +12,9 @@ class Subject extends Model
 
     protected $fillable = ['subject_name'];
 
-    public function subject()
+    public function marks()
     {
-        return $this->belongsTo(Mark::class);
+        return $this->hasOne(Mark::class);
     }
 
     public function students()

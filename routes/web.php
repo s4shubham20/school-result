@@ -30,5 +30,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
    Route::resource('subject', SubjectController::class);
    Route::resource('result', ResultController::class);
    Route::get('view/result/{id}', [PDFController::class, 'generatePDF'])->name('print.result');
-   Route::get('/fee/student',[StudentController::class, 'feePayment'])->name('student.fee');
+   Route::get('/student/fee/view',[StudentController::class, 'getFee'])->name('student.fee.view');
+   Route::get('/student/fee/view/{id}',[StudentController::class, 'studentFeeDetails'])->name('student.fee.view.each');
+   Route::post('/fee/student',[StudentController::class, 'feePayment'])->name('student.fee');
+   Route::get('student/fee/receipt/{id}', [PDFController::class, 'generateFeeReceipt'])->name('print.fee.receipt');
 });
