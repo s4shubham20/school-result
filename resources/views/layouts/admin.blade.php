@@ -16,6 +16,7 @@
 	<link href="{{ asset('assets/plugins/highcharts/css/highcharts.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
+	<link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"/>
 	<!-- loader-->
 	<link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
 	<script src="{{ asset('assets/js/pace.min.js') }}"></script>
@@ -29,6 +30,11 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}" />
 	<link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
+    <style>
+        #myTable_wrapper:first-child{
+            padding: 1rem !important;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -53,6 +59,8 @@
 <script src="{{ asset('assets/plugins/highcharts/js/variable-pie.js') }}"></script>
 <script src="{{ asset('assets/plugins/highcharts/js/export-data.js') }}"></script>
 <script src="{{ asset('assets/plugins/highcharts/js/accessibility.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 <script src="{{ asset('assets/js/index.js') }}"></script>
 <!--app JS-->
 <script src="{{ asset('assets/js/app.js') }}"></script>
@@ -60,6 +68,9 @@
 
 @show
 <script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
     const deleteButton = document.getElementById("deleteAlert");
     if(deleteButton){
 

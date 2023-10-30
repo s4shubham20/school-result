@@ -13,8 +13,8 @@
                     </div>
                     <div class="card-body">
                         <div class="card border-top border-0 border-4 border-danger">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered">
+                            <div class="table-responsive my-3 mx-1">
+                                <table class="table table-hover table-striped table-bordered" id="myTable">
                                     <thead>
                                         <tr>
                                             <th>#</th>

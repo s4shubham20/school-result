@@ -28,7 +28,7 @@ class PDFController extends Controller
     public function generateFeeReceipt($eid)
     {
         $id         =   Crypt::decrypt($eid);
-        $fee        =   Fee::findOrFail($id);
+        $fee        =   Fee::with('student')->findOrFail($id);
         $pdf        =   pdf::loadView('admin.pdf.fee-receipt',compact('fee'));
         $pdf->set_option('isHtml5ParserEnabled', true);
         return $pdf->stream('fee-receipt.pdf');

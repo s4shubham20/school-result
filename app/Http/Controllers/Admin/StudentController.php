@@ -135,6 +135,12 @@ class StudentController extends Controller
             $receiptNo = '10000';
         }
         $studentId = Crypt::decrypt($request->student_id);
+        $student = Student::findOrFail($studentId);
+        $totalFeePaid = collect($student->fee);
+        $totalAmount = $totalFeePaid->sum('amount');
+        if($totalAmount >= $student->course_fee){
+            return redirect()->back()->with('success', 'No more fee payment required for this student anymore!');
+        }
         Fee::create([
             'receipt_no'    =>  $receiptNo,
             'payment_mode'  =>  $request->payment_mode,
@@ -144,7 +150,7 @@ class StudentController extends Controller
         ]);
 
         return redirect()
-            ->route("student.fee.view")
+            ->back()
         ->with("success","Fee amount successfully paid!");
     }
 

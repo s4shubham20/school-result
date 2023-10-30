@@ -10,7 +10,7 @@
                             <i class="bx bxs-user me-1 font-22 text-primary"></i>
                             <h5 class="m-0 text-primary">{{ $student->name }} Details</h5>
                         </div>
-                        <button type="button" class="btn btn-secondary fw-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#feeModal">
+                        <button type="button" class="btn btn-success fw-bold py-1 px-3" data-bs-toggle="modal" data-bs-target="#feeModal">
                             <span class="parent-icon">
                                 <i class="bx bx-rupee m-0"></i>
                             </span>
@@ -39,6 +39,15 @@
                                     <div class="col-md-5">
                                         <div>{{ $student->admission_no }}</div>
                                     </div>
+                                    <div class="col-md-5">
+                                        <div>Course Fee</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>:</div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div>{{ $student->course_fee }}</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -61,12 +70,24 @@
                                     <div class="col-md-5">
                                         <div>{{ date('d-M-Y', strtotime($student->dob)) }}</div>
                                     </div>
+                                    <div class="col-md-5">
+                                        <div>Remaing Amount</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>:</div>
+                                    </div>
+                                    @php
+                                        $collection = collect($student->fee);
+                                    @endphp
+                                    <div class="col-md-5">
+                                        <div>{{ $student->course_fee - $collection->sum('amount'); }}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card border-top border-0 border-4 border-danger">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered">
+                            <div class="table-responsive my-3">
+                                <table class="table table-hover table-striped table-bordered" id="myTable">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -85,11 +106,14 @@
                                             <td>{{ $item->created_at->format('d-M-Y') }}</td>
                                             <td>{{ $item->payment_mode }}</td>
                                             <td>{{ $item->amount }}</td>
-                                            <td>
-                                                <a href="{{ route('print.fee.receipt',Crypt::encrypt($item->id)) }}" class="btn btn-primary">
+                                            <td class="buttonPair">
+                                                <a href="{{ route('print.fee.receipt',Crypt::encrypt($item->id)) }}" class="btn btn-primary printBtn">
                                                     <i class="lni lni-printer"></i>
                                                     Print Receipt
                                                 </a>
+                                                <button class="btn btn-primary loadingBtn d-none" type="button"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                    <span class="">Loading...</span>
+                                                </button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -156,4 +180,18 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+    <script>
+        const buttonPairs = document.querySelectorAll('.buttonPair');
+        buttonPairs.forEach(function (pair) {
+            const printBtn = pair.querySelector('.printBtn');
+            const loadingBtn = pair.querySelector('.loadingBtn');
+
+            printBtn.addEventListener('click', function () {
+                printBtn.classList.add("d-none");
+                loadingBtn.classList.remove("d-none");
+            });
+        });
+    </script>
 @endsection
