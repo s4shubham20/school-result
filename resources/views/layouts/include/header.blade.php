@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="user-box dropdown px-3">
+            <div class="user-box dropdown px-3" id="user-section">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{ asset('assets/images/profile/avtar.png') }}" class="user-img" alt="user avatar">

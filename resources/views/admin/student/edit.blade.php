@@ -13,7 +13,7 @@
                         <a href="{{ route('student.index') }}" class="btn btn-primary"><i class="lni lni-eye"></i> View Records</a>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" method="post" action="{{ route('student.update', Crypt::encrypt($student->id)) }}">
+                        <form class="row g-3" method="post" action="{{ route('student.update', Crypt::encrypt($student->id)) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="col-md-6">
@@ -71,17 +71,25 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="dob" class="form-label">Date Of Birth<span class="text-danger fs-4">*</span></label>
                                 <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob',$student->dob) }}"/>
                                 @error('dob')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="course_fee" class="form-label">Course Fee<span class="text-danger fs-4">*</span></label>
                                 <input type="text" class="form-control @error('course_fee') is-invalid @enderror" id="course_fee" name="course_fee" value="{{ old('course_fee', $student->course_fee) }}" placeholder="Enter course fee of student!"/>
                                 @error('course_fee')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('storage/student-image/'.$student->profile_pic) }}" alt="{{ $student->profile_pic }}" width="50" height="50"/>
+                                <label for="profile_pic" class="form-label">Student Photograph<span class="text-danger fs-4">*</span></label>
+                                <input type="file" class="form-control @error('profile_pic') is-invalid @enderror" id="profile_pic" name="profile_pic"/>
+                                @error('profile_pic')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

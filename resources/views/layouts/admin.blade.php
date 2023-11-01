@@ -34,6 +34,13 @@
         #myTable_wrapper:first-child{
             padding: 1rem !important;
         }
+        #user-section{
+            border-left: 2px solid #8833ff;
+            border-right: 2px solid #8833ff;
+            border-bottom-left-radius: 30px;
+            border-top-right-radius: 30px;
+            box-shadow: 5px 4px 9px #8833ff;
+        }
     </style>
 </head>
 <body>

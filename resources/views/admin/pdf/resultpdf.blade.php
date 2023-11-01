@@ -11,7 +11,6 @@
             color: #0dcaf0;
         }
         table #bgImage::before{
-            /* margin:auto auto; */
             content: '';
             position: absolute;
             width: 100%;
@@ -43,7 +42,7 @@
                             <table style="width: 100%;">
                                 <tr>
                                     <td style="width: 50%;">
-                                        <img src="{{ storage_path("app/public/result-icon/result-icon.png") }}" alt="result-icon" class="img-fluid"/>
+                                        <img src="{{ storage_path("app/public/result-icon/result-icon-bg.png") }}" alt="result-icon" class="img-fluid"/>
                                     </td>
                                     <td style="width: 50%;">
                                         <h6 style="margin-top:100px; text-align:right;" class="text-color">College Code:E0062</h6>

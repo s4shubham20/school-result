@@ -25,7 +25,8 @@
                                         <div>
                                             <img src="{{ asset('assets/images/result-icon/result-icon.png') }}" alt="" class="img-fluid"/>
                                         </div>
-                                        <div class="mt-4">
+                                        <div>
+                                            <img src="{{ asset('storage/student-image/'.$student->profile_pic) }}" alt="">
                                             <h6 class="text-info opacity-100 mt-5">College Code:E0062</h6>
                                         </div>
                                     </div>

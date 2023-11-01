@@ -77,10 +77,10 @@
                                         <div>:</div>
                                     </div>
                                     @php
-                                        $collection = collect($student->fee);
+                                        $collection = collect($student->fee)->sum('amount');
                                     @endphp
                                     <div class="col-md-5">
-                                        <div>{{ $student->course_fee - $collection->sum('amount'); }}</div>
+                                        <div>{{ $student->course_fee - $collection }}</div>
                                     </div>
                                 </div>
                             </div>

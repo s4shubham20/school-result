@@ -20,6 +20,7 @@ class Student extends Model
         "dob",
         "course_fee",
         "address",
+        "profile_pic",
         'attendance',
         'sports_cultural_activities',
         'punctual_activities',

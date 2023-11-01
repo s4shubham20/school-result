@@ -6,6 +6,9 @@ use App\Models\{Student,Fee};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -46,9 +49,23 @@ class StudentController extends Controller
             "mother_name"   => "required",
             "dob"           => "required",
             "course_fee"    => "required|numeric|gt:0",
+            "profile_pic"   => "required|image|mimes:jpeg,jpg,png|max:200",
             "address"       => "required",
         ]);
-        Student::create($request->all());
+        if ($request->hasFile('profile_pic')) {
+            $file = $request->file('profile_pic');
+            $fileName = $request->file('profile_pic')->getClientOriginalName();
+            $filewithoutext = pathinfo($fileName, PATHINFO_FILENAME);
+            $fileExt = $file->getClientOriginalExtension();
+            $fileSlug = Str::slug(uniqid() . '_' . $filewithoutext);
+            $saveImage = $fileSlug.'.'.$fileExt;
+            $file->storeAs('public/student-image', $fileSlug . '.' . $fileExt);
+        } else {
+            $saveImage = null;
+        }
+        $data                   =   $request->all();
+        $data['profile_pic']    =   $saveImage;
+        Student::create($data);
         return redirect()->route("student.index")->with("success","Student registration has been successfully done!");
     }
 
@@ -76,7 +93,7 @@ class StudentController extends Controller
     {
         $id      = Crypt::decrypt($eid);
         $student = Student::findOrFail($id);
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             "name"          => "required",
             "admission_no"  => "required|unique:students,admission_no,".$id,
             "class"         => "required",
@@ -84,10 +101,30 @@ class StudentController extends Controller
             "father_name"   => "required",
             "mother_name"   => "required",
             "dob"           => "required",
+            "profile_pic"   => "mimes:jpeg,jpg,png|max:200",
             "course_fee"    => "required|numeric|gt:0",
             "address"       => "required",
         ]);
-        $student->update($request->all());
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if ($request->hasFile('profile_pic')) {
+            $file = $request->file('profile_pic');
+            $fileName = $request->file('profile_pic')->getClientOriginalName();
+            $filewithoutext = pathinfo($fileName, PATHINFO_FILENAME);
+            $fileExt = $file->getClientOriginalExtension();
+            $fileSlug = Str::slug(uniqid() . '_' . $filewithoutext);
+            $saveImage = $fileSlug.'.'.$fileExt;
+            $file->storeAs('public/student-image', $fileSlug . '.' . $fileExt);
+            if(File::exists(storage_path("app/public/student-image/".$student->profile_pic))){
+                File::delete(storage_path("app/public/student-image/".$student->profile_pic));
+            }
+        } else {
+            $saveImage = $student->profile_pic;
+        }
+        $data                   =   $request->all();
+        $data['profile_pic']    =   $saveImage;
+        $student->update($data);
         return redirect()->route("student.index")->with("success","Student registration has been successfully updated!");
     }
 
