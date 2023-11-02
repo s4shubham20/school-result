@@ -37,19 +37,39 @@
                 </table>
                 <table style="width: 100%;" class="my-2">
                     <tr>
-                        <td style="width: 39%;"></td>
-                        <td style="width: 61%;">
+                        <td style="width: 39%; text-align:left;">
+                            <h6 style="margin-top:100px;" class="text-color mb-0">College Code:E0062</h6>
+                        </td>
+                        <td style="width: 33%;">
+                            <img src="{{ storage_path("app/public/result-icon/result-icon.png") }}" alt="result-icon" class="img-fluid"/>
+                        </td>
+                        <td style="width: 28%;">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td style="width: 50%;">
-                                        <img src="{{ storage_path("app/public/result-icon/result-icon-bg.png") }}" alt="result-icon" class="img-fluid"/>
-                                    </td>
-                                    <td style="width: 50%;">
-                                        <h6 style="margin-top:100px; text-align:right;" class="text-color">College Code:E0062</h6>
+                                    <td style="width:33%;"></td>
+                                    <td style="width:33%;"></td>
+                                    <td style="display:inline-block; padding:0.25rem; border:2px solid #dee2e6; border-radius:3px;">
+                                        <img src="{{ storage_path("app/public/student-image/".$student->profile_pic) }}" alt="result-icon" width="105" height="105"/>
                                     </td>
                                 </tr>
                             </table>
                         </td>
+                        {{-- <td style="width: 39%;"></td>
+                        <td style="width: 61%;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 33%;">
+                                        <h6 style="margin-top:100px; text-align:right;" class="text-color">College Code:E0062</h6>
+                                    </td>
+                                    <td style="width: 33%;">
+                                        <img src="{{ storage_path("app/public/result-icon/result-icon.png") }}" alt="result-icon" class="img-fluid"/>
+                                    </td>
+                                    <td style="width: 33%;">
+                                        <h6 style="margin-top:100px; text-align:right;" class="text-color">College Code:E0062</h6>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td> --}}
                     </tr>
                 </table>
                 <table style="width: 100%;">

@@ -102,7 +102,8 @@
 @elseif (Session::has('error'))
     <script>
         toastMixin.fire({
-            title: '{{ Session::get("success") }}',
+            animation: true,
+            title: '{{ Session::get("error") }}',
             icon: 'error'
         });
     </script>

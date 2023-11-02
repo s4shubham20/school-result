@@ -91,9 +91,9 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $eid)
     {
-        $id      = Crypt::decrypt($eid);
-        $student = Student::findOrFail($id);
-        $validator = Validator::make($request->all(), [
+        $id         = Crypt::decrypt($eid);
+        $student    = Student::findOrFail($id);
+        $validator  = Validator::make($request->all(), [
             "name"          => "required",
             "admission_no"  => "required|unique:students,admission_no,".$id,
             "class"         => "required",
@@ -125,7 +125,7 @@ class StudentController extends Controller
         $data                   =   $request->all();
         $data['profile_pic']    =   $saveImage;
         $student->update($data);
-        return redirect()->route("student.index")->with("success","Student registration has been successfully updated!");
+        return redirect()->route("student.index")->with("success","Student details have been successfully updated!");
     }
 
     /**
@@ -176,7 +176,7 @@ class StudentController extends Controller
         $totalFeePaid = collect($student->fee);
         $totalAmount = $totalFeePaid->sum('amount');
         if($totalAmount >= $student->course_fee){
-            return redirect()->back()->with('success', 'No more fee payment required for this student anymore!');
+            return redirect()->back()->with('error', 'No more fee payment required for this student anymore!');
         }
         Fee::create([
             'receipt_no'    =>  $receiptNo,

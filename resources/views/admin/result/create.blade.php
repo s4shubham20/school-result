@@ -19,15 +19,15 @@
                                     <h5 class="text-center text-info opacity-100">असतो मा सदगमय || तमसो मा ज्योतिर्गमय ||</h5>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-5 d-flex align-items-end">
+                                        <h6 class="text-info opacity-100 mb-0">College Code:E0062</h6>
                                     </div>
                                     <div class="col-md-7 d-flex justify-content-between align-items-center">
                                         <div>
-                                            <img src="{{ asset('assets/images/result-icon/result-icon.png') }}" alt="" class="img-fluid"/>
+                                            <img src="{{ asset('storage/result-icon/result-icon.png') }}" class="img-fluid"/>
                                         </div>
-                                        <div>
-                                            <img src="{{ asset('storage/student-image/'.$student->profile_pic) }}" alt="">
-                                            <h6 class="text-info opacity-100 mt-5">College Code:E0062</h6>
+                                        <div class="border border-2 rounded-1 p-1">
+                                            <img src="{{ asset('storage/student-image/'.$student->profile_pic) }}" width="100" height="100">
                                         </div>
                                     </div>
                                 </div>

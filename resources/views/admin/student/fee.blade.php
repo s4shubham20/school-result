@@ -31,7 +31,16 @@
                                         @foreach ($students as $key => $item)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class="recent-product-img">
+                                                        <img src="{{ asset('storage/student-image/'.$item->profile_pic) }}" alt="">
+                                                    </div>
+                                                    <div class="ms-2">
+                                                        {{ $item->name }}
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>{{ $item->admission_no }}</td>
                                             <td>{{ $item->class }}</td>
                                             <td>{{ $item->roll_no }}</td>
