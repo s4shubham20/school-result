@@ -20,6 +20,7 @@
 	<!-- loader-->
 	<link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
 	<script src="{{ asset('assets/js/pace.min.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css" rel="stylesheet">
 	<!-- Bootstrap CSS -->
 	<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/css/bootstrap-extended.css') }}" rel="stylesheet">
@@ -68,12 +69,44 @@
 <script src="{{ asset('assets/plugins/highcharts/js/accessibility.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
 <script src="{{ asset('assets/js/index.js') }}"></script>
 <!--app JS-->
 <script src="{{ asset('assets/js/app.js') }}"></script>
 @section('js')
 
 @show
+<script>
+    let toastMixin = Swal.mixin({
+        toast: true,
+        icon: 'success',
+        title: 'General Title',
+        animation: false,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 6000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+</script>
+@if(Session::has('success'))
+    <script>
+        toastMixin.fire({
+            animation: true,
+            title: '{{ Session::get("success") }}'
+        });
+    </script>
+@elseif (Session::has('error'))
+    <script>
+        toastMixin.fire({
+            title: '{{ Session::get("success") }}',
+            icon: 'error'
+        });
+    </script>
+@endif
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable();

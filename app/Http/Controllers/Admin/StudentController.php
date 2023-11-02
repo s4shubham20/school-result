@@ -53,15 +53,15 @@ class StudentController extends Controller
             "address"       => "required",
         ]);
         if ($request->hasFile('profile_pic')) {
-            $file = $request->file('profile_pic');
-            $fileName = $request->file('profile_pic')->getClientOriginalName();
+            $file           = $request->file('profile_pic');
+            $fileName       = $request->file('profile_pic')->getClientOriginalName();
             $filewithoutext = pathinfo($fileName, PATHINFO_FILENAME);
-            $fileExt = $file->getClientOriginalExtension();
-            $fileSlug = Str::slug(uniqid() . '_' . $filewithoutext);
-            $saveImage = $fileSlug.'.'.$fileExt;
+            $fileExt        = $file->getClientOriginalExtension();
+            $fileSlug       = Str::slug(uniqid() . '_' . $filewithoutext);
+            $saveImage      = $fileSlug.'.'.$fileExt;
             $file->storeAs('public/student-image', $fileSlug . '.' . $fileExt);
         } else {
-            $saveImage = null;
+            $saveImage      = null;
         }
         $data                   =   $request->all();
         $data['profile_pic']    =   $saveImage;
