@@ -175,8 +175,9 @@ class StudentController extends Controller
         $student = Student::findOrFail($studentId);
         $totalFeePaid = collect($student->fee);
         $totalAmount = $totalFeePaid->sum('amount');
-        if($totalAmount >= $student->course_fee){
-            return redirect()->back()->with('error', 'No more fee payment required for this student anymore!');
+        $totalRemainAmount = $student->course_fee - $totalAmount;
+        if($totalRemainAmount < $request->amount){
+            return redirect()->back()->with('error', 'The remaining fee amount is less than amount added!');
         }
         Fee::create([
             'receipt_no'    =>  $receiptNo,
@@ -189,6 +190,15 @@ class StudentController extends Controller
         return redirect()
             ->back()
         ->with("success","Fee amount successfully paid!");
+    }
+
+    public function feeDelete($eid)
+    {
+        $id = Crypt::decrypt($eid);
+        Fee::destroy($id);
+        return redirect()
+            ->back()
+        ->with("success","Successfully Deleted!");
     }
 
 }

@@ -95,7 +95,7 @@
                                             <th>Date</th>
                                             <th>Pay Mode</th>
                                             <th>Amount Paid</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -114,6 +114,7 @@
                                                 <button class="btn btn-primary loadingBtn d-none" type="button"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                     <span class="">Loading...</span>
                                                 </button>
+                                                <a href="{{ route('fee.delete', Crypt::encrypt($item->id)) }}" id="deleteAlert" class="btn btn-danger"><i class="bx bx-trash"></i>Delete</a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -182,16 +183,28 @@
 </div>
 @endsection
 @section('js')
-    <script>
-        const buttonPairs = document.querySelectorAll('.buttonPair');
-        buttonPairs.forEach(function (pair) {
-            const printBtn = pair.querySelector('.printBtn');
-            const loadingBtn = pair.querySelector('.loadingBtn');
+@if($errors->has('amount'))
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let modal = document.querySelector("#feeModal")
+        $(modal).modal('show');
+    });
+</script>
+@endif
+<script>
+    const buttonPairs = document.querySelectorAll('.buttonPair');
+    buttonPairs.forEach(function (pair) {
+        const printBtn = pair.querySelector('.printBtn');
+        const loadingBtn = pair.querySelector('.loadingBtn');
 
-            printBtn.addEventListener('click', function () {
-                printBtn.classList.add("d-none");
-                loadingBtn.classList.remove("d-none");
-            });
+        printBtn.addEventListener('click', function () {
+            printBtn.classList.add("d-none");
+            loadingBtn.classList.remove("d-none");
+            setTimeout(() => {
+                printBtn.classList.remove("d-none");
+                loadingBtn.classList.add("d-none");
+            }, 10000);
         });
-    </script>
+    });
+</script>
 @endsection

@@ -34,4 +34,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
    Route::get('/student/fee/view/{id}',[StudentController::class, 'studentFeeDetails'])->name('student.fee.view.each');
    Route::post('/fee/student',[StudentController::class, 'feePayment'])->name('student.fee');
    Route::get('student/fee/receipt/{id}', [PDFController::class, 'generateFeeReceipt'])->name('print.fee.receipt');
+   Route::get('fee/delete/{id}', [StudentController::class, 'feeDelete'])->name('fee.delete');
 });
