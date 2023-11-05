@@ -39,4 +39,9 @@ class Student extends Model
         return $this->hasMany(Fee::class);
     }
 
+    public function transfer_certificate()
+    {
+        return $this->hasOne(TransferCertificate::class);
+    }
+
 }

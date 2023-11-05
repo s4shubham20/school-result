@@ -21,8 +21,7 @@
                                             <th>Class</th>
                                             <th>Roll No</th>
                                             <th>DOB</th>
-                                            <th>Father Name</th>
-                                            <th>Mother Name</th>
+                                            <th>Parent</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -44,8 +43,13 @@
                                             <td>{{ $item->class }}</td>
                                             <td>{{ $item->roll_no }}</td>
                                             <td>{{ $item->dob }}</td>
-                                            <td>{{ $item->father_name }}</td>
-                                            <td>{{ $item->mother_name }}</td>
+                                            <td>
+                                                <b>Father Name: </b>
+                                                {{ $item->father_name }}
+                                                <br/>
+                                                <b>Mother Name: </b>
+                                                {{ $item->mother_name }}
+                                            </td>
                                             <td>
                                                 <div class="d-flex">
                                                     <a href="{{ route('student.edit',Crypt::encrypt($item->id)) }}" class="btn btn-info text-light"><i class="bx bx-edit"></i></a>
@@ -55,6 +59,7 @@
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" id="deleteAlert"><i class="bx bx-trash"></i></button>
                                                     </form>
+                                                    <a href="{{ route('student.certificate', Crypt::encrypt($item->id)) }}" class="btn btn-dark ms-2"><i class="bx bx-download"></i>Transfer Certificate</a>
                                                 </div>
                                             </td>
                                         </tr>

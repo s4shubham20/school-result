@@ -33,4 +33,13 @@ class PDFController extends Controller
         $pdf->set_option('isHtml5ParserEnabled', true);
         return $pdf->stream('fee-receipt.pdf');
     }
+
+    public function generateTransferCertifcate($eid)
+    {
+        $id         =   Crypt::decrypt($eid);
+        $student    =   Student::findOrFail($id);
+        $pdf        = pdf::loadView('admin.pdf.transfer-certificate', compact('student'));
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        return $pdf->stream('fee-receipt.pdf');
+    }
 }

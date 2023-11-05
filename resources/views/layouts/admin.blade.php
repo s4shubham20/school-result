@@ -42,6 +42,19 @@
             border-top-right-radius: 30px;
             box-shadow: 5px 4px 9px #8833ff;
         }
+        .custom-input{
+            padding: 0px 10px;
+            border-top-left-radius: 5px;
+            border-end-start-radius: 5px;
+            border: 1px solid #dfe2e6;
+        }
+        .custom-input:focus{
+            color: var(--bs-body-color);
+            background-color: var(--bs-body-bg);
+            border-color: #86b7fe;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+        }
     </style>
 </head>
 <body>

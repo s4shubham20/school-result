@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\{Student,Fee};
+use App\Models\{Student, Fee, TransferCertificate};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
@@ -199,6 +199,63 @@ class StudentController extends Controller
         return redirect()
             ->back()
         ->with("success","Successfully Deleted!");
+    }
+
+    public function getTransferCertificate($eid)
+    {
+        $id = Crypt::decrypt($eid);
+        $student = Student::with('transfer_certificate')->findOrFail($id);
+        return view('admin.student.transfer-certificate', compact("student"));
+    }
+
+    public function setTransferCertificate(Request $request)
+    {
+        $studentId                  =   $request->student_id;
+        $id                         =   $request->transferId;
+        if(TransferCertificate::where('student_id',$studentId)->exists()){
+            $transferCertificate    =   TransferCertificate::where('student_id',$studentId)->firstOrFail();
+            $reference_no           =   "required|unique:transfer_certificates,reference_no,".$id;
+        }else{
+            $transferCertificate    =   new TransferCertificate();
+            $reference_no           =   "required|unique:transfer_certificates";
+        }
+
+        $request->validate([
+            "student_id"            =>  "required",
+            "title"                 =>  "required",
+            "father_title"          =>  "required",
+            'reference_no'          =>  $reference_no,
+            "town"                  =>  "required",
+            "district"              =>  "required",
+            "state"                 =>  "required",
+            "admission_date"        =>  "required",
+            "leaving_date"          =>  "required",
+            "leaving_class"         =>  "required",
+            "status"                =>  "required",
+            "examinaiton_month"     =>  "required",
+            "examinaiton_year"      =>  "required",
+            "character"             =>  "required",
+            "reason_for_leaving"    =>  "required",
+        ]);
+
+        $transferCertificate->student_id            =   $studentId;
+        $transferCertificate->name_title            =   $request->title;
+        $transferCertificate->fathername_title      =   $request->father_title;
+        $transferCertificate->reference_no          =   $request->reference_no;
+        $transferCertificate->town                  =   $request->town;
+        $transferCertificate->district              =   $request->district;
+        $transferCertificate->state                 =   $request->state;
+        $transferCertificate->admission_date        =   $request->admission_date;
+        $transferCertificate->leaving_date          =   $request->leaving_date;
+        $transferCertificate->leaving_class         =   $request->leaving_class;
+        $transferCertificate->examinaiton_month     =   $request->examinaiton_month;
+        $transferCertificate->examinaiton_year      =   $request->examinaiton_year;
+        $transferCertificate->character             =   $request->character;
+        $transferCertificate->reason_for_leaving    =   $request->reason_for_leaving;
+        $transferCertificate->status                =   $request->status;
+        $transferCertificate->save();
+
+        return redirect()->back()->with('success', "Transfer certificate successfully generated");
     }
 
 }
