@@ -30,11 +30,12 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
                             <div class="col-md-6 mb-2">
                                 <label for="admission_no" class="form-label mb-0">Admission No.<span class="text-danger fs-4">*</span></label>
                                 <input type="text" class="form-control @error('admission_no') is-invalid @enderror" name="admission_no" id="admission_no" placeholder="Enter admission no. here!" value="{{ $student->admission_no  }}" disabled/>
                                 @error('admission_no')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
@@ -47,34 +48,54 @@
                                     <input type="text" class="form-control" name="admission_no" id="admission_no" placeholder="Enter admission no. here!" value="{{ $student->father_name  }}" disabled/>
                                 </div>
                                 @error('father_title')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="mother_title" class="form-label mb-0">Mother Name<span class="text-danger fs-4">*</span></label>
+                                <div class="input-group">
+                                    <select name="mother_title" id="mother_title" class="custom-input @error('mother_title') is-invalid @enderror">
+                                        <option value="Mrs." {{ old('mother_title',$student->transfer_certificate->mothername_title ?? "") == "Mrs."?"selected":"" }}>Mrs.</option>
+                                        <option value="Late" {{ old('mother_title',$student->transfer_certificate->mothername_title ?? "") == "Late"?"selected":"" }}>Late</option>
+                                    </select>
+                                    <input type="text" class="form-control" name="admission_no" id="admission_no" placeholder="Enter admission no. here!" value="{{ $student->mother_name  }}" disabled/>
+                                </div>
+                                @error('father_title')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="register_no" class="form-label mb-0">Register No.<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('register_no') is-invalid @enderror" name="register_no" id="register_no" placeholder="Enter register no. here!" value="{{ $student->transfer_certificate->register_no ?? ""  }}"/>
+                                @error('register_no')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="reference_no" class="form-label mb-0">Registration No.<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('reference_no') is-invalid @enderror" name="reference_no" id="reference_no" placeholder="Enter student registration no. here!" value="{{ old('reference_no',$student->transfer_certificate->reference_no ?? "") }}"/>
-                                @error('reference_no')
+                                <label for="certificate_no" class="form-label mb-0">Certificate No.<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('certificate_no') is-invalid @enderror" name="certificate_no" id="certificate_no" placeholder="Enter student certificate no. here!" value="{{ old('certificate_no',$student->transfer_certificate->certificate_no ?? "") }}"/>
+                                @error('certificate_no')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="town" class="form-label mb-0">Village/Town<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('town') is-invalid @enderror" name="town" id="town" placeholder="Enter village/town name here!" value="{{ old('town' ,$student->transfer_certificate->town ?? "") }}"/>
-                                @error('town')
+                                <label for="caste" class="form-label mb-0">Caste<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('caste') is-invalid @enderror" name="caste" id="caste" placeholder="Enter caste here!" value="{{ old('caste' ,$student->transfer_certificate->caste ?? "") }}"/>
+                                @error('caste')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="district" class="form-label mb-0">District<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('district') is-invalid @enderror" name="district" id="district" placeholder="Enter district name here!" value="{{ old('district', $student->transfer_certificate->district ?? "") }}"/>
-                                @error('district')
+                                <label for="tahsil" class="form-label mb-0">Tahsil<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('tahsil') is-invalid @enderror" name="tahsil" id="tahsil" placeholder="Enter tahsil name here!" value="{{ old('tahsil', $student->transfer_certificate->tahsil ?? "") }}"/>
+                                @error('tahsil')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="state" class="form-label mb-0">State<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('state') is-invalid @enderror" name="state" id="state" placeholder="Enter state name here!" value="{{ old('state', $student->transfer_certificate->state ?? "") }}"/>
-                                @error('state')
+                                <label for="period_of_stay_in_state" class="form-label mb-0">Period of time stay in state<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('period_of_stay_in_state') is-invalid @enderror" name="period_of_stay_in_state" id="period_of_stay_in_state" placeholder="Enter period of time stay in state here!" value="{{ old('period_of_stay_in_state', $student->transfer_certificate->period_of_stay_in_state ?? "") }}"/>
+                                @error('period_of_stay_in_state')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -86,76 +107,30 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="leaving_date" class="form-label mb-0">Leaving Date<span class="text-danger fs-4">*</span></label>
+                                <label for="admission_regsiter_no" class="form-label mb-0">Admission Regsiter No<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('admission_regsiter_no') is-invalid @enderror" name="admission_regsiter_no" id="admission_regsiter_no" value="{{ old('admission_regsiter_no',$student->transfer_certificate->admission_regsiter_no ?? "") }}" placeholder="Enter admission regsiter no. here!"/>
+                                @error('admission_regsiter_no')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="admission_last_date" class="form-label mb-0">Admission Last Date<span class="text-danger fs-4">*</span></label>
+                                <input type="date" class="form-control @error('admission_last_date') is-invalid @enderror" name="admission_last_date" id="admission_last_date" value="{{ old('admission_last_date', $student->transfer_certificate->admission_last_date ?? "") }}"/>
+                                @error('admission_last_date')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="last_date_of_school" class="form-label mb-0">Last Date Of School<span class="text-danger fs-4">*</span></label>
+                                <input type="date" class="form-control @error('last_date_of_school') is-invalid @enderror" name="last_date_of_school" id="last_date_of_school" value="{{ old('last_date_of_school',$student->transfer_certificate->last_date_of_school ?? "") }}"/>
+                                @error('last_date_of_school')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="leaving_date" class="form-label mb-0">Withdrawl Date Of School<span class="text-danger fs-4">*</span></label>
                                 <input type="date" class="form-control @error('leaving_date') is-invalid @enderror" name="leaving_date" id="leaving_date" value="{{ old('leaving_date',$student->transfer_certificate->leaving_date ?? "") }}"/>
                                 @error('leaving_date')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="leaving_class" class="form-label mb-0">On the date of leaving student was studying in class<span class="text-danger fs-4">*</span></label>
-                                <select class="form-select @error('leaving_class') is-invalid @enderror" name="leaving_class" id="leaving_class">
-                                    <option value="1st" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "1st"?"selected":"" }}>1st</option>
-                                    <option value="2nd" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "2nd"?"selected":"" }}>2nd</option>
-                                    <option value="3rd" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "3rd"?"selected":"" }}>3rd</option>
-                                    <option value="4th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "4th"?"selected":"" }}>4th</option>
-                                    <option value="5th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "5th"?"selected":"" }}>5th</option>
-                                    <option value="6th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "6th"?"selected":"" }}>6th</option>
-                                    <option value="7th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "7th"?"selected":"" }}>7th</option>
-                                    <option value="8th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "8th"?"selected":"" }}>8th</option>
-                                    <option value="9th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "9th"?"selected":"" }}>9th</option>
-                                    <option value="10th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "10th"?"selected":"" }}>10th</option>
-                                    <option value="11th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "11th"?"selected":"" }}>11th</option>
-                                    <option value="12th" {{ old('leaving_class', $student->transfer_certificate->leaving_class ?? "") == "12th"?"selected":"" }}>12th</option>
-                                </select>
-                                @error('leaving_class')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="status" class="form-label mb-0">Pass/Failed Status<span class="text-danger fs-4">*</span></label>
-                                <select name="status" id="status" class="form-select">
-                                    <option value="passed" {{ old('status', $student->transfer_certificate->status ?? "") == "passed" ? "selected":"" }}>Passed</option>
-                                    <option value="failed" {{ old('status', $student->transfer_certificate->status ?? "") == "failed" ? "selected":"" }}>Failed</option>
-                                </select>
-                                @error('status')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="examinaiton_month" class="form-label mb-0">Examination Month<span class="text-danger fs-4">*</span></label>
-                                <select name="examinaiton_month" id="examinaiton_month" class="form-select @error('examinaiton_month') is-invalid @enderror">
-                                    <option value="Jan" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Jan" ? "selected":"" }}>Jan</option>
-                                    <option value="Feb" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Feb" ? "selected":"" }}>Feb</option>
-                                    <option value="Mar" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Mar" ? "selected":"" }}>Mar</option>
-                                    <option value="Apr" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Apr" ? "selected":"" }}>Apr</option>
-                                    <option value="May" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "May" ? "selected":"" }}>May</option>
-                                    <option value="Jun" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Jun" ? "selected":"" }}>Jun</option>
-                                    <option value="Jul" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Jul" ? "selected":"" }}>Jul</option>
-                                    <option value="Aug" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Aug" ? "selected":"" }}>Aug</option>
-                                    <option value="Sep" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Sep" ? "selected":"" }}>Sep</option>
-                                    <option value="Oct" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Oct" ? "selected":"" }}>Oct</option>
-                                    <option value="Nov" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Nov" ? "selected":"" }}>Nov</option>
-                                    <option value="Dec" {{ old('examination_month', $student->transfer_certificate->examination_month ?? "") == "Dec" ? "selected":"" }}>Dec</option>
-                                </select>
-                                @error('examinaiton_month')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="examinaiton_year" class="form-label mb-0">Examination Year<span class="text-danger fs-4">*</span></label>
-                                <input type="text" name="examinaiton_year" id="examinaiton_year" class="form-control @error('examinaiton_year') is-invalid @enderror" placeholder="Enter last examination year like 2023 here!" value="{{ old('examinaiton_year', $student->transfer_certificate->examinaiton_year ?? "") }}"/>
-                                @error('examinaiton_year')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="character" class="form-label mb-0">Overall Character<span class="text-danger fs-4">*</span></label>
-                                <select name="character" id="character" class="form-select @error('character') is-invalid @enderror">
-                                    <option value="satifactory" {{ old('character', $student->transfer_certificate->character ?? "") == "satifactory" ? "selected":""}}>Satifactory</option>
-                                    <option value="not satifactory" {{ old('character', $student->transfer_certificate->character ?? "") == "not satifactory" ? "selected":""}}>Not Satifactory</option>
-                                </select>
-                                @error('character')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -169,6 +144,83 @@
                                     <option value="Guardian option" {{ old('reason_for_leaving', $student->transfer_certificate->reason_for_leaving ?? "") == "Guardian option" ? "selected":""}}>Guardian option</option>
                                 </select>
                                 @error('reason_for_leaving')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="character" class="form-label mb-0">Character<span class="text-danger fs-4">*</span></label>
+                                <select name="character" id="character" class="form-select @error('character') is-invalid @enderror">
+                                    <option value="good" {{ old('character', $student->transfer_certificate->character ?? "") == "good" ? "selected":""}}>Good</option>
+                                    <option value="not good" {{ old('character', $student->transfer_certificate->character ?? "") == "not good" ? "selected":""}}>Not Good</option>
+                                </select>
+                                @error('character')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="higher_examination" class="form-label mb-0">Name of the higher examination passed out<span class="text-danger fs-4">*</span></label>
+                                <select class="form-select @error('higher_examination') is-invalid @enderror" name="higher_examination" id="higher_examination">
+                                    <option value="1st" {{ old('higher_examination', $student->transfer_certificate->leaving_class ?? "") == "1st"?"selected":"" }}>1st</option>
+                                    <option value="2nd" {{ old('higher_examination', $student->transfer_certificate->leaving_class ?? "") == "2nd"?"selected":"" }}>2nd</option>
+                                    <option value="3rd" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "3rd"?"selected":"" }}>3rd</option>
+                                    <option value="4th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "4th"?"selected":"" }}>4th</option>
+                                    <option value="5th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "5th"?"selected":"" }}>5th</option>
+                                    <option value="6th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "6th"?"selected":"" }}>6th</option>
+                                    <option value="7th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "7th"?"selected":"" }}>7th</option>
+                                    <option value="8th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "8th"?"selected":"" }}>8th</option>
+                                    <option value="9th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "9th"?"selected":"" }}>9th</option>
+                                    <option value="10th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "10th"?"selected":"" }}>10th</option>
+                                    <option value="11th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "11th"?"selected":"" }}>11th</option>
+                                    <option value="12th" {{ old('higher_examination', $student->transfer_certificate->higher_examination ?? "") == "12th"?"selected":"" }}>12th</option>
+                                </select>
+                                @error('higher_examination')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="form-lable mb-0" for="passed_out_date">Passed Out Date<span class="text-danger fs-4">*</span></label>
+                                <input type="date" class="form-control @error('passed_out_date') is-invalid @enderror" name="passed_out_date" id="passed_out_date" value="{{ old('passed_out_date',$student->transfer_certificate->passed_out_date ?? "") }}"/>
+                                @error('passed_out_date')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="form-lable mb-0" for="language_of_student">Language Of Student<span class="text-danger fs-4">*</span></label>
+                                <select class="form-select @error('language_of_student') is-invalid @enderror" name="language_of_student" id="language_of_student">
+                                    <option value="Hindi" {{ old('language_of_student', $student->transfer_certificate->language_of_student ?? "") == "passed" ? "selected":"" }}>Hindi</option>
+                                    <option value="English" {{ old('language_of_student', $student->transfer_certificate->language_of_student ?? "") == "passed" ? "selected":"" }}>English</option>
+                                    <option value="Other" {{ old('language_of_student', $student->transfer_certificate->language_of_student ?? "") == "passed" ? "selected":"" }}>Other</option>
+
+                                </select>
+                                @error('language_of_student')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="form-lable mb-0" for="free_of_cost">Free Of Cost<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('free_of_cost') is-invalid @enderror" name="free_of_cost" id="free_of_cost" value="{{ old('free_of_cost',$student->transfer_certificate->free_of_cost ?? "") }}" placeholder="Enter free of cost here!"/>
+                                @error('free_of_cost')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="form-lable mb-0" for="days_school_is_open">Number of days school is open<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('days_school_is_open') is-invalid @enderror" name="days_school_is_open" id="days_school_is_open" value="{{ old('days_school_is_open',$student->transfer_certificate->days_school_is_open ?? "") }}" placeholder="Enter number of days school is open here!"/>
+                                @error('days_school_is_open')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="form-lable mb-0" for="illness_days">Number of illness days<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('illness_days') is-invalid @enderror" name="illness_days" id="illness_days" value="{{ old('illness_days',$student->transfer_certificate->illness_days ?? "") }}" placeholder="Enter Number of illness days here!"/>
+                                @error('illness_days')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="form-lable mb-0" for="father_occupation">Student Father Occupation<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('father_occupation') is-invalid @enderror" name="father_occupation" id="father_occupation" value="{{ old('father_occupation',$student->transfer_certificate->father_occupation ?? "") }}" placeholder="Enter student father occupation here!"/>
+                                @error('father_occupation')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

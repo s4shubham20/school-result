@@ -35,7 +35,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
    Route::post('/fee/student',[StudentController::class, 'feePayment'])->name('student.fee');
    Route::get('student/fee/receipt/{id}', [PDFController::class, 'generateFeeReceipt'])->name('print.fee.receipt');
    Route::get('fee/delete/{id}', [StudentController::class, 'feeDelete'])->name('fee.delete');
-   Route::get('student/transfer-certificate/{id}', [StudentController::class, 'getTransferCertificate'])->name('student.certificate');
-   Route::post('student/transfer-certificate', [StudentController::class, 'setTransferCertificate'])->name('student.certificate.store');
+   Route::get('student/transfer-certificate/{id}', [StudentController::class, 'getTransferCertificate']);
+   Route::post('student/transfer-certificate', [StudentController::class, 'setTransferCertificate']);
    Route::get('student/transfer-certificate/view/{id}', [PDFController::class, 'generateTransferCertifcate'])->name('student.certificate.view');
+   Route::get('student/migration-certificate/{id}', [StudentController::class,'getMigrationCertificate'])->name('student.certificate');
+   Route::post('student/migration-certificate', [StudentController::class,'setMigrationCertificate'])->name('student.certificate.store');
 });

@@ -16,17 +16,25 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->string('name_title')->nullable();
             $table->string('fathername_title')->nullable();
-            $table->string('reference_no')->nullable();
-            $table->string('town')->nullable();
-            $table->string('district')->nullable();
-            $table->string('state')->nullable();
-            $table->string('admission_date')->nullable();
-            $table->year('leaving_date')->nullable();
-            $table->string('leaving_class')->nullable();
-            $table->date('examinaiton_month')->nullable();
-            $table->date('examinaiton_year')->nullable();
-            $table->string('character')->nullable();
+            $table->string('mothername_title')->nullable();
+            $table->string('register_no')->nullable();
+            $table->string('caste')->nullable();
+            $table->string('tahsil')->nullable();
+            $table->string('period_of_stay_in_state')->nullable();
+            $table->date('admission_date')->nullable();
+            $table->string('admission_regsiter_no')->nullable();
+            $table->date('admission_last_date')->nullable();
+            $table->date('last_date_of_school')->nullable();
+            $table->date('leaving_date')->nullable();
             $table->string('reason_for_leaving')->nullable();
+            $table->string('character')->nullable();
+            $table->string('higher_examination')->nullable();
+            $table->date('passed_out_date')->nullable();
+            $table->string('language_of_student')->nullable();
+            $table->string('free_of_cost')->nullable();
+            $table->string('days_school_is_open')->nullable();
+            $table->string('illness_days')->nullable();
+            $table->string('father_occupation')->nullable();
             $table->string('status')->nullable();
             $table->foreign('student_id')->references('id')
                 ->on('students')

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\{Student, Fee, TransferCertificate};
+use App\Models\{Student, Fee, TransferCertificate, MigrationCertificate};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
@@ -210,52 +210,110 @@ class StudentController extends Controller
 
     public function setTransferCertificate(Request $request)
     {
+        // return $request;
         $studentId                  =   $request->student_id;
         $id                         =   $request->transferId;
         if(TransferCertificate::where('student_id',$studentId)->exists()){
             $transferCertificate    =   TransferCertificate::where('student_id',$studentId)->firstOrFail();
-            $reference_no           =   "required|unique:transfer_certificates,reference_no,".$id;
+            $certificate_no         =   "required|unique:transfer_certificates,certificate_no,".$id;
         }else{
             $transferCertificate    =   new TransferCertificate();
-            $reference_no           =   "required|unique:transfer_certificates";
+            $certificate_no         =   "required|unique:transfer_certificates";
         }
 
         $request->validate([
-            "student_id"            =>  "required",
-            "title"                 =>  "required",
-            "father_title"          =>  "required",
-            'reference_no'          =>  $reference_no,
-            "town"                  =>  "required",
-            "district"              =>  "required",
-            "state"                 =>  "required",
-            "admission_date"        =>  "required",
-            "leaving_date"          =>  "required",
-            "leaving_class"         =>  "required",
-            "status"                =>  "required",
-            "examinaiton_month"     =>  "required",
-            "examinaiton_year"      =>  "required",
-            "character"             =>  "required",
-            "reason_for_leaving"    =>  "required",
+            "student_id"                    => "required",
+            "title"                         => "required",
+            "father_title"                  => "required",
+            "mother_title"                  => "required",
+            "register_no"                   => "required",
+            'certificate_no'                => $certificate_no,
+            "caste"                         => "required",
+            "tahsil"                        => "required",
+            "period_of_stay_in_state"       => "required",
+            "admission_date"                => "required",
+            "admission_regsiter_no"         => "required",
+            "admission_last_date"           => "required",
+            "last_date_of_school"           => "required",
+            "leaving_date"                  => "required",
+            "reason_for_leaving"            => "required",
+            "character"                     => "required",
+            "higher_examination"            => "required",
+            "passed_out_date"               => "required",
+            "language_of_student"           => "required",
+            "free_of_cost"                  => "required",
+            "days_school_is_open"           => "required",
+            "illness_days"                  => "required",
+            "father_occupation"             => "required"
         ]);
-
-        $transferCertificate->student_id            =   $studentId;
-        $transferCertificate->name_title            =   $request->title;
-        $transferCertificate->fathername_title      =   $request->father_title;
-        $transferCertificate->reference_no          =   $request->reference_no;
-        $transferCertificate->town                  =   $request->town;
-        $transferCertificate->district              =   $request->district;
-        $transferCertificate->state                 =   $request->state;
-        $transferCertificate->admission_date        =   $request->admission_date;
-        $transferCertificate->leaving_date          =   $request->leaving_date;
-        $transferCertificate->leaving_class         =   $request->leaving_class;
-        $transferCertificate->examinaiton_month     =   $request->examinaiton_month;
-        $transferCertificate->examinaiton_year      =   $request->examinaiton_year;
-        $transferCertificate->character             =   $request->character;
-        $transferCertificate->reason_for_leaving    =   $request->reason_for_leaving;
-        $transferCertificate->status                =   $request->status;
+        $transferCertificate->student_id                =   $studentId;
+        $transferCertificate->name_title                =   $request->title;
+        $transferCertificate->fathername_title          =   $request->father_title;
+        $transferCertificate->mothername_title          =   $request->father_title;
+        $transferCertificate->register_no               =   $request->register_no;
+        $transferCertificate->certificate_no            =   $request->certificate_no;
+        $transferCertificate->caste                     =   $request->caste;
+        $transferCertificate->tahsil                    =   $request->tahsil;
+        $transferCertificate->period_of_stay_in_state   =   $request->period_of_stay_in_state;
+        $transferCertificate->admission_date            =   $request->admission_date;
+        $transferCertificate->admission_regsiter_no     =   $request->admission_regsiter_no;
+        $transferCertificate->admission_last_date       =   $request->admission_last_date;
+        $transferCertificate->last_date_of_school       =   $request->last_date_of_school;
+        $transferCertificate->leaving_date              =   $request->leaving_date;
+        $transferCertificate->reason_for_leaving        =   $request->reason_for_leaving;
+        $transferCertificate->character                 =   $request->character;
+        $transferCertificate->higher_examination        =   $request->higher_examination;
+        $transferCertificate->passed_out_date           =   $request->passed_out_date;
+        $transferCertificate->language_of_student       =   $request->language_of_student;
+        $transferCertificate->free_of_cost              =   $request->free_of_cost;
+        $transferCertificate->days_school_is_open       =   $request->days_school_is_open;
+        $transferCertificate->illness_days              =   $request->illness_days;
+        $transferCertificate->father_occupation         =   $request->father_occupation;
         $transferCertificate->save();
 
         return redirect()->back()->with('success', "Transfer certificate successfully generated");
+    }
+
+    public function getMigrationCertificate($eid)
+    {
+        $id = Crypt::decrypt($eid);
+        $student = Student::with('transfer_certificate')->findOrFail($id);
+        return view('admin.student.migration-certificate', compact('student'));
+    }
+
+    public function setMigrationCertificate(Request $request)
+    {
+        return $request;
+        $studentId                  =   $request->student_id;
+        $id                         =   $request->transferId;
+        if(MigrationCertificate::where('student_id',$studentId)->exists()){
+            $transferCertificate    =   MigrationCertificate::where('student_id',$studentId)->firstOrFail();
+            $certificate_no         =   "required|unique:migration_certificates,certificate_no,".$id;
+        }else{
+            $transferCertificate    =   new MigrationCertificate();
+            $certificate_no         =   "required|unique:migration_certificates";
+        }
+
+        $request->validate([
+            "student_id"                => "required",
+            "transferId"                => "required",
+            "withdraw_file_no"          => "required",
+            "certificate_no"            => $certificate_no,
+            "title"                     => "required",
+            "occupation"                => "required",
+            "last_institution_name"     => "required",
+            "cast_or_religion"          => "required",
+            "mothername_title"          => "required.",
+            "fathername_title"          => "required.",
+            "province_of_residence"     => "required",
+            "class.*"                   => "required",
+            "year_or_session.*"         => "required" ,
+            "date_of_admission.*"       => "required" ,
+            "date_of_promotion.*"       => "required" ,
+            "date_of_removal.*"         => "required" ,
+            "conduct_or_concession.*"   => "required" ,
+            "work.*"                    => "required"
+        ]);
     }
 
 }
