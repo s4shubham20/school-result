@@ -22,9 +22,9 @@
     </style>
 </head>
 <body>
-    <table style="width: 100%;">
+    <table style="width: 100%; border:1px solid black;" class="mt-3">
         <tr style="width: 100%;" id="bgImage">
-            <td>
+            <td class="p-1">
                 <table style="width: 100%;">
                     <tr>
                         <td>
@@ -257,13 +257,13 @@
                         </td>
                     </tr>
                 </table>
-                <table style="width: 100%;" class="m-0 mb-1">
+                <table style="width: 100%;" class="m-0 mb-3">
                     <tr style="width: 100%;">
                         <td>Class Teacher</td>
                         <td>Principle</td>
                         <td class="text-center">Parent</td>
                     </tr>
-                    <tr style="width: 100%; text-align: center;">
+                    <tr style="width: 100%; text-align: center; text-align:end;">
                         <td colspan="3">
                             <hr class="fs-4 m-0 mt-2 border-2 text-color opacity-75"/>
                         </td>

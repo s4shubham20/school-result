@@ -38,8 +38,8 @@ class PDFController extends Controller
     {
         $id         =   Crypt::decrypt($eid);
         $student    =   Student::findOrFail($id);
-        // return view('admin.pdf.transfer-certificate', compact('student'));
-        $pdf        = pdf::loadView('admin.pdf.transfer-certificate', compact('student'));
+        // return view('admin.pdf.migration-certificate', compact('student'));
+        $pdf        = pdf::loadView('admin.pdf.migration-certificate', compact('student'));
         $pdf->set_option('isHtml5ParserEnabled', true);
         return $pdf->stream('fee-receipt.pdf');
     }

@@ -52,8 +52,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="form-lable mb-0" for="occupation">Name ,Occupation and Address<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('occupation') is-invalid @enderror" name="occupation" id="occupation" value="{{ old('occupation',$student->transfer_certificate->occupation ?? "") }}" placeholder="Enter Name ,Occupation and Address here!"/>
+                                <label class="form-lable mb-0" for="occupation">Name ,Occupation and Address<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('occupation') is-invalid @enderror" id="occupation" name="occupation" value="{{ old('occupation',$student->transfer_certificate->occupation ?? "") }}" placeholder="Enter Name ,Occupation and Address here!"/>
                                 @error('occupation')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -111,6 +111,8 @@
                                 @enderror
                             </div>
                             @php
+                            if(isset($student->transfer_certificate)){
+
                                 $jsonData               = json_decode($student->transfer_certificate->class, true);
                                 $year_or_session        = json_decode($student->transfer_certificate->year_or_session, true);
                                 $date_of_admission      = json_decode($student->transfer_certificate->date_of_admission, true);
@@ -118,14 +120,15 @@
                                 $date_of_removal        = json_decode($student->transfer_certificate->date_of_removal, true);
                                 $conduct_or_concession  = json_decode($student->transfer_certificate->conduct_or_concession, true);
                                 $work                   = json_decode($student->transfer_certificate->work, true);
+                            }
                             @endphp
                             @isset($jsonData)
                                 @foreach ($jsonData as $key => $item)
                                     <div class="rasmussen row pe-0">
                                         <hr class="border-2 m-0 my-2 border-danger opacity-100"/>
                                         <div class="col-md-6 mb-2 pe-0">
-                                            <label for="class" class="form-label mb-0">Class<span class="text-danger fs-4">*</span></label>
-                                            <select class="form-select" name="class[]" id="class">
+                                            <label for="class{{ $key }}" class="form-label mb-0">Class<span class="text-danger fs-4">*</span></label>
+                                            <select class="form-select" name="class[]" id="class{{ $key }}">
                                                 <option value="1st" {{ $item == "1st" ? "selected":"" }}>1st</option>
                                                 <option value="2nd" {{ $item == "2nd" ? "selected":"" }}>2nd</option>
                                                 <option value="3rd" {{ $item == "3rd" ? "selected":"" }}>3rd</option>
@@ -141,31 +144,31 @@
                                             </select>
                                         </div>
                                         <div class="col-md-5 mb-2 pe-0">
-                                            <label for="year_or_session" class="form-label mb-0">Year Or Session<span class="text-danger fs-4">*</span></label>
-                                            <input type="text" class="form-control" name="year_or_session[]" id="year_or_session" placeholder="Enter year or session here!" value="{{ $year_or_session[$key] }}"/>
+                                            <label for="year_or_session{{ $key }}" class="form-label mb-0">Year Or Session<span class="text-danger fs-4">*</span></label>
+                                            <input type="text" class="form-control" name="year_or_session[]" id="year_or_session{{ $key }}" placeholder="Enter year or session here!" value="{{ $year_or_session[$key] ?? "" }}"/>
                                         </div>
                                         <div class="col-md-1 mt-4 pe-0">
                                             <button type="button" id="removeButton{{ $key }}" onclick="removeFunction();" class="btn mt-2 btn-danger text-light"><i class="lni lni-circle-minus"></i></button>
                                         </div>
                                         <div class="col-md-4 mb-2 pe-0">
-                                            <label for="date_of_admission" class="form-label mb-0">Date Of Admission <span class="text-danger fs-4">*</span></label>
-                                            <input type="date" class="form-control" name="date_of_admission[]" id="date_of_admission" value="{{ $date_of_admission[$key] }}"/>
+                                            <label for="date_of_admission{{ $key }}" class="form-label mb-0">Date Of Admission <span class="text-danger fs-4">*</span></label>
+                                            <input type="date" class="form-control" name="date_of_admission[]" id="date_of_admission{{ $key }}" value="{{ $date_of_admission[$key] ?? "" }}"/>
                                         </div>
                                         <div class="col-md-4 mb-2 pe-0">
-                                            <label for="date_of_promotion" class="form-label mb-0">Date Of Promotion <span class="text-danger fs-4">*</span></label>
-                                            <input type="date" class="form-control" name="date_of_promotion[]" id="date_of_promotion" value="{{ $date_of_promotion[$key] }}"/>
+                                            <label for="date_of_promotion{{ $key }}" class="form-label mb-0">Date Of Promotion <span class="text-danger fs-4">*</span></label>
+                                            <input type="date" class="form-control" name="date_of_promotion[]" id="date_of_promotion{{ $key }}" value="{{ $date_of_promotion[$key] ?? "" }}"/>
                                         </div>
                                         <div class="col-md-4 mb-2 pe-0">
-                                            <label for="date_of_removal" class="form-label mb-0">Date Of Removal <span class="text-danger fs-4">*</span></label>
-                                            <input type="date" class="form-control" name="date_of_removal[]" id="date_of_removal" value="{{ $date_of_removal[$key] }}"/>
+                                            <label for="date_of_removal{{ $key }}" class="form-label mb-0">Date Of Removal <span class="text-danger fs-4">*</span></label>
+                                            <input type="date" class="form-control" name="date_of_removal[]" id="date_of_removal{{ $key }}" value="{{ $date_of_removal[$key] ?? "" }}"/>
                                         </div>
                                         <div class="col-md-6 mb-2 pe-0">
-                                            <label for="conduct_or_concession" class="form-label mb-0">Conduct & concession if any fees<span class="text-danger fs-4"></span></label>
-                                            <input type="text" class="form-control" name="conduct_or_concession[]" id="conduct_or_concession" placeholder="Enter Conduct & concession if any fees here!" value="{{ $conduct_or_concession[$key] }}"/>
+                                            <label for="conduct_or_concession{{ $key }}" class="form-label mb-0">Conduct & concession if any fees<span class="text-danger fs-4"></span></label>
+                                            <input type="text" class="form-control" name="conduct_or_concession[]" id="conduct_or_concession{{ $key }}" placeholder="Enter Conduct & concession if any fees here!" value="{{ $conduct_or_concession[$key] ?? "" }}"/>
                                         </div>
                                         <div class="col-md-6 mb-2 pe-0">
-                                            <label for="work" class="form-label mb-0">Work<span class="text-danger fs-4">*</span></label>
-                                            <input type="text" class="form-control @error('work') is-invalid @enderror" name="work[]" id="work" placeholder="Enter work here!" value="{{ $work[$key] }}"/>
+                                            <label for="work{{ $key }}" class="form-label mb-0">Work<span class="text-danger fs-4">*</span></label>
+                                            <input type="text" class="form-control @error('work') is-invalid @enderror" name="work[]" id="work{{ $key }}" placeholder="Enter work here!" value="{{ $work[$key] ?? "" }}"/>
                                         </div>
                                     </div>
                                 @endforeach
