@@ -41,7 +41,7 @@ class Student extends Model
 
     public function transfer_certificate()
     {
-        return $this->hasOne(TransferCertificate::class);
+        return $this->hasOne(MigrationCertificate::class);
     }
 
 }

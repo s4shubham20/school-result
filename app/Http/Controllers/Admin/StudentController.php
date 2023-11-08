@@ -283,7 +283,7 @@ class StudentController extends Controller
 
     public function setMigrationCertificate(Request $request)
     {
-        return $request;
+        $request;
         $studentId                  =   $request->student_id;
         $id                         =   $request->transferId;
         if(MigrationCertificate::where('student_id',$studentId)->exists()){
@@ -293,27 +293,45 @@ class StudentController extends Controller
             $transferCertificate    =   new MigrationCertificate();
             $certificate_no         =   "required|unique:migration_certificates";
         }
-
+        // return $certificate_no;
         $request->validate([
             "student_id"                => "required",
-            "transferId"                => "required",
             "withdraw_file_no"          => "required",
             "certificate_no"            => $certificate_no,
             "title"                     => "required",
             "occupation"                => "required",
-            "last_institution_name"     => "required",
             "cast_or_religion"          => "required",
-            "mothername_title"          => "required.",
-            "fathername_title"          => "required.",
+            "mothername_title"          => "required",
+            "fathername_title"          => "required",
             "province_of_residence"     => "required",
             "class.*"                   => "required",
             "year_or_session.*"         => "required" ,
             "date_of_admission.*"       => "required" ,
             "date_of_promotion.*"       => "required" ,
-            "date_of_removal.*"         => "required" ,
-            "conduct_or_concession.*"   => "required" ,
             "work.*"                    => "required"
         ]);
+
+        $transferCertificate->student_id            =   $request->student_id;
+        $transferCertificate->withdraw_file_no      =   $request->withdraw_file_no;
+        $transferCertificate->certificate_no        =   $request->certificate_no;
+        $transferCertificate->name_title            =   $request->title;
+        $transferCertificate->mothername_title      =   $request->mothername_title;
+        $transferCertificate->fathername_title      =   $request->fathername_title;
+        $transferCertificate->occupation            =   $request->occupation;
+        $transferCertificate->last_institution_name =   $request->last_institution_name;
+        $transferCertificate->cast_or_religion      =   $request->cast_or_religion;
+        $transferCertificate->province_of_residence =   $request->province_of_residence;
+        $transferCertificate->class                 =   json_encode($request->class);
+        $transferCertificate->date_of_admission     =   json_encode($request->date_of_admission);
+        $transferCertificate->date_of_promotion     =   json_encode($request->date_of_promotion);
+        $transferCertificate->date_of_removal       =   json_encode($request->date_of_removal);
+        $transferCertificate->year_or_session       =   json_encode($request->year_or_session);
+        $transferCertificate->conduct_or_concession =   json_encode($request->conduct_or_concession);
+        $transferCertificate->work                  =   json_encode($request->work);
+        $transferCertificate->save();
+
+        return redirect()->back()->with('success', "Transfer certificate successfully generated");
+
     }
 
 }

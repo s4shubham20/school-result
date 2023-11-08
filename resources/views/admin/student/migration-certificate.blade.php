@@ -110,73 +110,113 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            @php
+                                $jsonData               = json_decode($student->transfer_certificate->class, true);
+                                $year_or_session        = json_decode($student->transfer_certificate->year_or_session, true);
+                                $date_of_admission      = json_decode($student->transfer_certificate->date_of_admission, true);
+                                $date_of_promotion      = json_decode($student->transfer_certificate->date_of_promotion, true);
+                                $date_of_removal        = json_decode($student->transfer_certificate->date_of_removal, true);
+                                $conduct_or_concession  = json_decode($student->transfer_certificate->conduct_or_concession, true);
+                                $work                   = json_decode($student->transfer_certificate->work, true);
+                            @endphp
+                            @isset($jsonData)
+                                @foreach ($jsonData as $key => $item)
+                                    <div class="rasmussen row pe-0">
+                                        <hr class="border-2 m-0 my-2 border-danger opacity-100"/>
+                                        <div class="col-md-6 mb-2 pe-0">
+                                            <label for="class" class="form-label mb-0">Class<span class="text-danger fs-4">*</span></label>
+                                            <select class="form-select" name="class[]" id="class">
+                                                <option value="1st" {{ $item == "1st" ? "selected":"" }}>1st</option>
+                                                <option value="2nd" {{ $item == "2nd" ? "selected":"" }}>2nd</option>
+                                                <option value="3rd" {{ $item == "3rd" ? "selected":"" }}>3rd</option>
+                                                <option value="4th" {{ $item == "4th" ? "selected":"" }}>4th</option>
+                                                <option value="5th" {{ $item == "5th" ? "selected":"" }}>5th</option>
+                                                <option value="6th" {{ $item == "6th" ? "selected":"" }}>6th</option>
+                                                <option value="7th" {{ $item == "7th" ? "selected":"" }}>7th</option>
+                                                <option value="8th" {{ $item == "8th" ? "selected":"" }}>8th</option>
+                                                <option value="9th" {{ $item == "9th" ? "selected":"" }}>9th</option>
+                                                <option value="10th" {{ $item == "10th" ? "selected":"" }}>10th</option>
+                                                <option value="11th" {{ $item == "11th" ? "selected":"" }}>11th</option>
+                                                <option value="12th" {{ $item == "12th" ? "selected":"" }}>12th</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-5 mb-2 pe-0">
+                                            <label for="year_or_session" class="form-label mb-0">Year Or Session<span class="text-danger fs-4">*</span></label>
+                                            <input type="text" class="form-control" name="year_or_session[]" id="year_or_session" placeholder="Enter year or session here!" value="{{ $year_or_session[$key] }}"/>
+                                        </div>
+                                        <div class="col-md-1 mt-4 pe-0">
+                                            <button type="button" id="removeButton{{ $key }}" onclick="removeFunction();" class="btn mt-2 btn-danger text-light"><i class="lni lni-circle-minus"></i></button>
+                                        </div>
+                                        <div class="col-md-4 mb-2 pe-0">
+                                            <label for="date_of_admission" class="form-label mb-0">Date Of Admission <span class="text-danger fs-4">*</span></label>
+                                            <input type="date" class="form-control" name="date_of_admission[]" id="date_of_admission" value="{{ $date_of_admission[$key] }}"/>
+                                        </div>
+                                        <div class="col-md-4 mb-2 pe-0">
+                                            <label for="date_of_promotion" class="form-label mb-0">Date Of Promotion <span class="text-danger fs-4">*</span></label>
+                                            <input type="date" class="form-control" name="date_of_promotion[]" id="date_of_promotion" value="{{ $date_of_promotion[$key] }}"/>
+                                        </div>
+                                        <div class="col-md-4 mb-2 pe-0">
+                                            <label for="date_of_removal" class="form-label mb-0">Date Of Removal <span class="text-danger fs-4">*</span></label>
+                                            <input type="date" class="form-control" name="date_of_removal[]" id="date_of_removal" value="{{ $date_of_removal[$key] }}"/>
+                                        </div>
+                                        <div class="col-md-6 mb-2 pe-0">
+                                            <label for="conduct_or_concession" class="form-label mb-0">Conduct & concession if any fees<span class="text-danger fs-4"></span></label>
+                                            <input type="text" class="form-control" name="conduct_or_concession[]" id="conduct_or_concession" placeholder="Enter Conduct & concession if any fees here!" value="{{ $conduct_or_concession[$key] }}"/>
+                                        </div>
+                                        <div class="col-md-6 mb-2 pe-0">
+                                            <label for="work" class="form-label mb-0">Work<span class="text-danger fs-4">*</span></label>
+                                            <input type="text" class="form-control @error('work') is-invalid @enderror" name="work[]" id="work" placeholder="Enter work here!" value="{{ $work[$key] }}"/>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endisset
+                            <div id="newRow"></div>
                             <hr class="border-2 m-0 my-2 border-danger opacity-100"/>
                             <div class="col-md-6 mb-2">
                                 <label for="class" class="form-label mb-0">Class<span class="text-danger fs-4">*</span></label>
-                                <select class="form-select @error('class') is-invalid @enderror" name="class[]" id="class">
-                                    <option value="1st" {{ old('class', $student->transfer_certificate->class ?? "") == "1st"?"selected":"" }}>1st</option>
-                                    <option value="2nd" {{ old('class', $student->transfer_certificate->class ?? "") == "2nd"?"selected":"" }}>2nd</option>
-                                    <option value="3rd" {{ old('class', $student->transfer_certificate->class ?? "") == "3rd"?"selected":"" }}>3rd</option>
-                                    <option value="4th" {{ old('class', $student->transfer_certificate->class ?? "") == "4th"?"selected":"" }}>4th</option>
-                                    <option value="5th" {{ old('class', $student->transfer_certificate->class ?? "") == "5th"?"selected":"" }}>5th</option>
-                                    <option value="6th" {{ old('class', $student->transfer_certificate->class ?? "") == "6th"?"selected":"" }}>6th</option>
-                                    <option value="7th" {{ old('class', $student->transfer_certificate->class ?? "") == "7th"?"selected":"" }}>7th</option>
-                                    <option value="8th" {{ old('class', $student->transfer_certificate->class ?? "") == "8th"?"selected":"" }}>8th</option>
-                                    <option value="9th" {{ old('class', $student->transfer_certificate->class ?? "") == "9th"?"selected":"" }}>9th</option>
-                                    <option value="10th" {{ old('class', $student->transfer_certificate->class ?? "") == "10th"?"selected":"" }}>10th</option>
-                                    <option value="11th" {{ old('class', $student->transfer_certificate->class ?? "") == "11th"?"selected":"" }}>11th</option>
-                                    <option value="12th" {{ old('class', $student->transfer_certificate->class ?? "") == "12th"?"selected":"" }}>12th</option>
+                                <select class="form-select" name="class[]" id="class">
+                                    <option value="1st">1st</option>
+                                    <option value="2nd">2nd</option>
+                                    <option value="3rd">3rd</option>
+                                    <option value="4th">4th</option>
+                                    <option value="5th">5th</option>
+                                    <option value="6th">6th</option>
+                                    <option value="7th">7th</option>
+                                    <option value="8th">8th</option>
+                                    <option value="9th">9th</option>
+                                    <option value="10th">10th</option>
+                                    <option value="11th">11th</option>
+                                    <option value="12th">12th</option>
                                 </select>
-                                @error('class')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="col-md-5 mb-2">
                                 <label for="year_or_session" class="form-label mb-0">Year Or Session<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('year_or_session') is-invalid @enderror" name="year_or_session[]" id="year_or_session" value="{{ old('year_or_session',$student->transfer_certificate->year_or_session ?? "") }}" placeholder="Enter year or session here!"/>
-                                @error('year_or_session')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="text" class="form-control" name="year_or_session[]" id="year_or_session" placeholder="Enter year or session here!"/>
                             </div>
                             <div class="col-md-1 mt-4">
                                 <button type="button" onclick="appendButton('');" class="btn mt-2 btn-info text-light"><i class="lni lni-circle-plus"></i></button>
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="date_of_admission" class="form-label mb-0">Date Of Admission <span class="text-danger fs-4">*</span></label>
-                                <input type="date" class="form-control @error('date_of_admission') is-invalid @enderror" name="date_of_admission[]" id="date_of_admission" value="{{ old('date_of_admission', $student->transfer_certificate->date_of_admission ?? "") }}"/>
-                                @error('date_of_admission')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="date" class="form-control" name="date_of_admission[]" id="date_of_admission"/>
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="date_of_promotion" class="form-label mb-0">Date Of Promotion <span class="text-danger fs-4">*</span></label>
-                                <input type="date" class="form-control @error('date_of_promotion') is-invalid @enderror" name="date_of_promotion[]" id="date_of_promotion" value="{{ old('date_of_promotion', $student->transfer_certificate->date_of_promotion ?? "") }}"/>
-                                @error('date_of_promotion')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="date" class="form-control" name="date_of_promotion[]" id="date_of_promotion"/>
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="date_of_removal" class="form-label mb-0">Date Of Removal <span class="text-danger fs-4">*</span></label>
-                                <input type="date" class="form-control @error('date_of_removal') is-invalid @enderror" name="date_of_removal[]" id="date_of_removal" value="{{ old('date_of_removal', $student->transfer_certificate->date_of_removal ?? "") }}"/>
-                                @error('date_of_removal')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="date" class="form-control" name="date_of_removal[]" id="date_of_removal"/>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="conduct_or_concession" class="form-label mb-0">Conduct & concession if any fees<span class="text-danger fs-4"></span></label>
-                                <input type="text" class="form-control @error('conduct_or_concession') is-invalid @enderror" name="conduct_or_concession[]" id="conduct_or_concession" value="{{ old('conduct_or_concession',$student->transfer_certificate->conduct_or_concession ?? "") }}" placeholder="Enter Conduct & concession if any fees here!"/>
-                                @error('conduct_or_concession')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="text" class="form-control" name="conduct_or_concession[]" id="conduct_or_concession" placeholder="Enter Conduct & concession if any fees here!"/>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="work" class="form-label mb-0">Work<span class="text-danger fs-4">*</span></label>
-                                <input type="text" class="form-control @error('work') is-invalid @enderror" name="work[]" id="work" value="{{ old('work',$student->transfer_certificate->work ?? "") }}" placeholder="Enter work here!"/>
-                                @error('work')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="text" class="form-control @error('work') is-invalid @enderror" name="work[]" id="work" placeholder="Enter work here!"/>
                             </div>
-                            <div id="newRow"></div>
+
                             <div class="col-md-6 my-3">
                                 <button class="btn btn-primary"><i class="bx bx-check-circle"></i>Submit</button>
                                 @isset($student->transfer_certificate->id)
@@ -201,12 +241,18 @@
                 newElement.className = "row";
                 newElement.innerHTML = `<hr class="border-2 m-0 my-2 border-danger opacity-100"><div class="mb-2 col-md-6"><label class="form-label mb-0" for=class>Class<span class="fs-4 text-danger">*</span></label> <select class="form-select"id=class name=class[]><option value=1st>1st<option value=2nd>2nd<option value=3rd>3rd<option value=4th>4th<option value=5th>5th<option value=6th>6th<option value=7th>7th<option value=8th>8th<option value=9th>9th<option value=10th>10th<option value=11th>11th<option value=12th>12th</select></div><div class="mb-2 col-md-5"><label class="form-label mb-0"for=year_or_session>Year Or Session<span class="fs-4 text-danger">*</span></label> <input class=form-control id=year_or_session name=year_or_session[] placeholder="Enter year or session here!"></div><div class="col-md-1 mt-4"><button class="btn btn-danger text-light mt-2" type="button" id="removeButton"><i class="lni lni-circle-minus"></i></button></div><div class="mb-2 col-md-4"><label class="form-label mb-0"for=date_of_admission>Date Of Admission <span class="fs-4 text-danger">*</span></label> <input class=form-control id=date_of_admission name=date_of_admission[] type=date></div><div class="mb-2 col-md-4"><label class="form-label mb-0"for=date_of_promotion>Date Of Promotion <span class="fs-4 text-danger">*</span></label> <input class=form-control id=date_of_promotion name=date_of_promotion[] type=date></div><div class="mb-2 col-md-4"><label class="form-label mb-0"for=date_of_removal>Date Of Removal <span class="fs-4 text-danger">*</span></label> <input class=form-control id=date_of_removal name=date_of_removal[] type=date></div><div class="mb-2 col-md-6"><label class="form-label mb-0"for=conduct_or_concession>Conduct & concession if any fees<span class="fs-4 text-danger"></span></label> <input class=form-control id=conduct_or_concession name=conduct_or_concession[] placeholder="Enter Conduct & concession if any fees here!"></div><div class="mb-2 col-md-6"><label class="form-label mb-0"for=work>Work<span class="fs-4 text-danger">*</span></label> <input class=form-control id=work name=work[] placeholder="Enter work here!"></div>`;
                 newRow.appendChild(newElement);
-
-                const removeButton = newElement.querySelector("#removeButton");
+                let removeButton = newElement.querySelector("#removeButton");
                 removeButton.addEventListener("click", () => {
                     newRow.removeChild(newElement);
                 });
             }
+        }
+
+
+        const removeFunction = (key) => {
+            let rasmussen = document.querySelector(".rasmussen");
+            let removeButton = document.querySelector("#removeButton");
+                rasmussen.remove();
         }
     </script>
 @endsection
