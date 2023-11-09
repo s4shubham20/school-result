@@ -27,6 +27,7 @@ return new class extends Migration
             $table->longText('date_of_admission')->nullable();
             $table->longText('date_of_promotion')->nullable();
             $table->longText('date_of_removal')->nullable();
+            $table->longText('cause_of_removal')->nullable();
             $table->longText('year_or_session')->nullable();
             $table->longText('conduct_or_concession')->nullable();
             $table->longText('work')->nullable();
