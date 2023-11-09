@@ -305,10 +305,10 @@ class StudentController extends Controller
             "fathername_title"          => "required",
             "province_of_residence"     => "required",
             "class.*"                   => "required",
-            "year_or_session.*"         => "required" ,
-            "date_of_admission.*"       => "required" ,
-            "date_of_promotion.*"       => "required" ,
-            "work.*"                    => "required"
+            // "year_or_session.*"         => "required" ,
+            // "date_of_admission.*"       => "required" ,
+            // "date_of_promotion.*"       => "required" ,
+            // "work.*"                    => "required"
         ]);
 
         $transferCertificate->student_id            =   $request->student_id;
@@ -327,6 +327,7 @@ class StudentController extends Controller
         $transferCertificate->date_of_removal       =   json_encode($request->date_of_removal);
         $transferCertificate->year_or_session       =   json_encode($request->year_or_session);
         $transferCertificate->conduct_or_concession =   json_encode($request->conduct_or_concession);
+        $transferCertificate->cause_of_removal      =   json_encode($request->cause_of_removal);
         $transferCertificate->work                  =   json_encode($request->work);
         $transferCertificate->save();
 

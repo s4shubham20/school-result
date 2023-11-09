@@ -3,18 +3,18 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Laravel</title>
+    <title>Scholar's Register & Transfer Certificate Form</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
 </head>
 <body>
-    <table style="width: 100%;">
+    <table style="width: 100%;" class="mt-4">
         <tr style="width: 100%;" class="mt-3" style="border: 1px groove black; border-bottom: 0px;">
             <td style="width:100%; font-size: 14px;" class="px-1">
                 <table style="width: 100%;" class="mt-2">
                     <tr>
-                        <td style="width:33%;">
+                        <td style="text-align: left;">
                             <p class="m-0 p-0">
                                 <span class="fw-bold mb-1">
                                     Admission File No.:
@@ -22,7 +22,7 @@
                                 {{ $student->admission_no }}
                             </p>
                         </td>
-                        <td style="width:33%; text-align: center;">
+                        <td style="text-align: center;">
                             <p class="m-0 p-0">
                                 <span class="fw-bold mb-1">
                                     Withdrawal File No. :
@@ -30,7 +30,7 @@
                                 {{ $student->transfer_certificate->withdraw_file_no }}
                             </p>
                         </td>
-                        <td style="width:33%; text-align: right;">
+                        <td style="text-align: right;">
                             <p class="m-0 p-0">
                                 <span class="fw-bold mb-1">
                                     Transfer Certificate File No. :
@@ -58,7 +58,7 @@
     </table>
     <table style="width: 100%;">
         <tr class="px-1" style="vertical-align: top; border: 1px groove black;">
-            <td class="border border-1 text-center" style="width: 25%; font-size: 14px;">
+            <td class="border border-1 text-center pt-1 pb-2" style="width: 25%; font-size: 14px;" >
                 <p class="m-0 p-0">
                     <span class="fw-bold">Scholar's Name</span>
                     <br/>
@@ -66,7 +66,7 @@
                     {{ $student->name }}
                 </p>
             </td>
-            <td class="text-center" style="width: 25%; font-size: 14px; border: 1px groove black;">
+            <td class="text-center pt-1 pb-2" style="width: 25%; font-size: 14px; border: 1px groove black;">
                 <p class="m-0 p-0">
                     <span class="fw-bold">
                         Name , occupatin and address
@@ -75,7 +75,7 @@
                     {{ $student->transfer_certificate->occupation }}
                 </p>
             </td>
-            <td class="text-center" style="width: 25%; font-size: 14px; border: 1px groove black;">
+            <td class="text-center pt-1 pb-2" style="width: 25%; font-size: 14px; border: 1px groove black;">
                 <p class="m-0 p-0">
                     <span class="fw-bold">
                         Date of the birth of the scholar
@@ -84,7 +84,7 @@
                     {{ date('d-M-Y' , strtotime($student->dob)) }}
                 </p>
             </td>
-            <td class="text-center" style="width: 25%; font-size: 14px; border: 1px groove black;">
+            <td class="text-center pt-1 pb-2" style="width: 25%; font-size: 14px; border: 1px groove black;">
                 <p class="m-0 p-0">
                     <span class="fw-bold">
                         Last institution attended before joining this one if any
@@ -96,14 +96,14 @@
     </table>
     <table style="width: 100%;">
         <tr class="px-1 border border-1 border-top-0" style="vertical-align: top;">
-            <td class="text-center" style="width: 25%; font-size: 14px;">
+            <td class="text-center pt-1 pb-2" style="width: 25%; font-size: 14px;">
                 <p class="m-0 p-0">
                     <span class="fw-bold">Cast or Religion</span>
                     <br/>
                     {{ $student->transfer_certificate->cast_or_religion }}
                 </p>
             </td>
-            <td class="text-center border border-1 border-top-0" style="width: 25%; font-size: 14px;">
+            <td class="text-center border border-1 border-top-0 pt-1 pb-2" style="width: 25%; font-size: 14px;">
                 <table style="width: 100%;">
                     <tr style="width: 100%; border-bottom:1px groove black;">
                         <td style="width: 100%;" class="text-center pb-1">
@@ -133,7 +133,7 @@
             </td>
             <td class="text-center" style="width: 25%; font-size: 14px; border-left: 1.4px groove black;">
             </td>
-            <td class="border border-1 border-top-0 text-center" style="width: 25%; font-size: 14px;">
+            <td class="border border-1 border-top-0 text-center pt-1 pb-2" style="width: 25%; font-size: 14px;">
                 <p class="m-0 p-0">
                     <span class="fw-bold">
                         Length of residence in this Province
@@ -155,7 +155,7 @@
             </th>
             <th style="border-right: 1px groove black; text-align: center;">Year or Session</th>
             <th style="border-right: 1px groove black; text-align: center;">Conduct or Concession</th>
-            <th style="border-right: 1px groove black; text-align: center;">Work</th>
+            <th style="border-right: 1px groove black; text-align: center;" class="px-1">Work</th>
         </tr>
         @php
             $jsonData               = json_decode($student->transfer_certificate->class);
@@ -199,6 +199,11 @@
             </tr>
         @endforeach
         @endisset
+        <tr style="font-size:14px; width:100%; border: 1px groove black; border-bottom: 2px groove black;">
+            <td colspan="8" class="px-1" style="height: 30px;">
+                Certified that the above Scholar's has been posted up to date of the Scholar's leaving as required by the department rules.
+            </td>
+        </tr>
     </table>
 </body>
 </html>
