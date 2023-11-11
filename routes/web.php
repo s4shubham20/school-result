@@ -39,5 +39,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
    Route::post('student/transfer-certificate', [StudentController::class, 'setTransferCertificate']);
    Route::get('student/migration-certificate/{id}', [StudentController::class,'getMigrationCertificate'])->name('student.certificate');
    Route::post('student/migration-certificate', [StudentController::class,'setMigrationCertificate'])->name('student.certificate.store');
-   Route::get('student/transfer-certificate/view/{id}', [PDFController::class, 'generateTransferCertifcate'])->name('student.certificate.view');
+   Route::get('student/migration-certificate/view/{id}', [PDFController::class, 'generateTransferCertifcate'])->name('student.certificate.view');
 });

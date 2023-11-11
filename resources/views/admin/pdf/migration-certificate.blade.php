@@ -11,31 +11,47 @@
 <body>
     <table style="width: 100%;" class="mt-4">
         <tr style="width: 100%;" class="mt-3" style="border: 1px groove black; border-bottom: 0px;">
-            <td style="width:100%; font-size: 14px;" class="px-1">
+            <td style="width:100%; font-size: 15.5px;" class="px-1">
                 <table style="width: 100%;" class="mt-2">
                     <tr>
                         <td style="text-align: left;">
                             <p class="m-0 p-0">
                                 <span class="fw-bold mb-1">
-                                    Admission File No.:
+                                    Admission File No:
                                 </span>
                                 {{ $student->admission_no }}
-                            </p>
-                        </td>
-                        <td style="text-align: center;">
-                            <p class="m-0 p-0">
-                                <span class="fw-bold mb-1">
-                                    Withdrawal File No. :
-                                </span>
-                                {{ $student->transfer_certificate->withdraw_file_no }}
                             </p>
                         </td>
                         <td style="text-align: right;">
                             <p class="m-0 p-0">
                                 <span class="fw-bold mb-1">
-                                    Transfer Certificate File No. :
+                                    Withdrawal File No:
+                                </span>
+                                {{ $student->transfer_certificate->withdraw_file_no }}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr style="width: 100%;" style="border: 1px groove black; border-bottom: 0px;">
+            <td style="width:100%; font-size: 15.5px;" class="px-1">
+                <table style="width: 100%;" class="mt-1">
+                    <tr>
+                        <td style="text-align: left;">
+                            <p class="m-0 p-0">
+                                <span class="fw-bold mb-1">
+                                    Transfer Certificate File No:
                                 </span>
                                 {{ $student->transfer_certificate->certificate_no }}
+                            </p>
+                        </td>
+                        <td style="text-align: right;">
+                            <p class="m-0 p-0">
+                                <span class="fw-bold mb-1">
+                                    College Code:
+                                </span>
+                                541640
                             </p>
                         </td>
                     </tr>
@@ -49,9 +65,9 @@
         </tr>
         <tr style="border: 1px groove black; border-bottom: 0px;">
             <td class="p-1" style="font-size: 15px;">
-                <p class="m-0 p-0">
+                <p class="m-0 p-0" style="font-size: 15.5px;">
                     <span class="fw-bold">Name of Institution:</span>
-                    H.L.S. PUBLIC SCHOOL KURSINDA GOTANI KUNDA PRAPTAPGARH U.P. 230202
+                    Shree Heera Lal Intermediate College Kursinda Gotani Kunda Praptapgarh U.P. 230202
                 </p>
             </td>
         </tr>
@@ -81,7 +97,7 @@
                         Date of the birth of the scholar
                     </span>
                     <br/>
-                    {{ date('d-M-Y' , strtotime($student->dob)) }}
+                    {{ date('d-m-Y' , strtotime($student->dob)) }}
                 </p>
             </td>
             <td class="text-center pt-1 pb-2" style="width: 25%; font-size: 14px; border: 1px groove black;">
@@ -131,7 +147,26 @@
                     </tr>
                 </table>
             </td>
+            @php
+                $dob = date('d-m-Y', strtotime($student->dob));
+                $birthMonth = \Carbon\Carbon::parse($dob);
+                $fullMonth = $birthMonth->format('F');
+                @endphp
+
+                @php
+                list($day, $month, $year) = explode('-', $dob);
+                $dayInWords = (new NumberFormatter("en", NumberFormatter::SPELLOUT))->format($day);
+                $yearInWords = (new NumberFormatter("en", NumberFormatter::SPELLOUT))->format($year);
+                $dateInWords = "$dayInWords $fullMonth $yearInWords";
+                @endphp
             <td class="text-center" style="width: 25%; font-size: 14px; border-left: 1.4px groove black;">
+                <p class="m-0 p-0">
+                    <span class="fw-bold">
+                        Date of the birth of the scholar (in words)
+                    </span>
+                    <br/>
+                    {{ ucwords(Str::replace('-',' ',$dateInWords)) }}
+                </p>
             </td>
             <td class="border border-1 border-top-0 text-center pt-1 pb-2" style="width: 25%; font-size: 14px;">
                 <p class="m-0 p-0">
