@@ -35,7 +35,7 @@
                 </tr>
             </table>
             <div class="text-center">
-                <h2 class="text-uppercase text-color">H.L.S. Public School</h2>
+                <h2 class="text-uppercase text-color">{{ $fee->student->school_name }}</h2>
                 <h2 class="text-uppercase h3 text-color opacity-100">Kursinda Gotani Kunda Praptapgarh U.P. 230202</h2>
             </div>
             <div>

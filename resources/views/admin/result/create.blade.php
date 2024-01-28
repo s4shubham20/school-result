@@ -16,23 +16,27 @@
                         <div class="card border-top border-0 border-4 border-danger">
                             <div class="card-body">
                                 <div>
-                                    <h5 class="text-center text-info opacity-100">असतो मा सदगमय || तमसो मा ज्योतिर्गमय ||</h5>
+                                    <h5 class="text-center text-info opacity-100 fw-bold">असतो मा सदगमय || तमसो मा ज्योतिर्गमय ||</h5>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-5 d-flex align-items-end">
-                                        <h6 class="text-info opacity-100 mb-0">College Code:E0062</h6>
+                                        <h6 class="text-info opacity-100 mb-0">College Code:{{ $student->school_code }}</h6>
                                     </div>
                                     <div class="col-md-7 d-flex justify-content-between align-items-center">
                                         <div>
                                             <img src="{{ asset('storage/result-icon/result-icon.png') }}" class="img-fluid"/>
                                         </div>
                                         <div class="border border-2 rounded-1 p-1">
-                                            <img src="{{ asset('storage/student-image/'.$student->profile_pic) }}" width="100" height="100">
+                                            @if (isset($student->profile_pic))
+                                                <img src="{{ asset("storage/student-image/$student->profile_pic") }}" alt="{{ $student->profile_pic }}" width="100" height="100">
+                                            @else
+                                                <img src="{{ asset("storage/student-image/dummy-profile.png") }}" alt="dummy-profile" width="100" height="100">
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <h2 class="text-uppercase text-info opacity-100">H.L.S. Public School</h2>
+                                    <h2 class="text-uppercase text-info opacity-100">{{ $student->school_name }}</h2>
                                     <h2 class="text-uppercase h3 text-info opacity-100">Kursinda Gotani Kunda Praptapgarh U.P. 230202</h2>
                                 </div>
                                 <div>
@@ -200,6 +204,17 @@
                                                 <label for="holiday_assignment" class="form-label">Holiday Assignment<span class="text-danger fs-4">*</span></label>
                                                 <input type="text" class="form-control @error('holiday_assignment') is-invalid @enderror" name="holiday_assignment" id="holiday_assignment" placeholder="Enter holiday assignment here!" value="{{ old('holiday_assignment', $student->holiday_assignment) }}"/>
                                             </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="rank_in_class" class="form-label">Rank In Class<span class="text-danger fs-4">*</span></label>
+                                                <input type="text" class="form-control @error('rank_in_class') is-invalid @enderror" name="rank_in_class" id="rank_in_class" value="{{old('rank_in_class', $student->rank_in_class)}}" placeholder="Enter rank in class here!"/>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="result_status" class="form-label">Result Status(Pass Or Fail)<span class="text-danger fs-4">*</span></label>
+                                                <select class="form-control @error('result_status') is-invalid @enderror" name="result_status" id="result_status">
+                                                    <option value="Passed" {{ old('result_status', $student->result_status) == "Passed" ? "selected":"" }}>Passed</option>
+                                                    <option value="Fail" {{ old('result_status', $student->result_status) == "Fail" ? "selected":"" }}>Fail</option>
+                                                </select>
+                                            </div>
                                             <div class="col-md-12">
                                                 <label for="remarks" class="form-label">Remarks<span class="text-danger fs-4">*</span></label>
                                                 <textarea name="remarks" id="remarks" class="form-control" placeholder="Enter remarks here!">{{ old('remarks',$student->remarks) }}</textarea>
@@ -213,6 +228,9 @@
                                                 @isset($mark[0])
                                                 <a href="{{ route('print.result',Crypt::encrypt($student->id)) }}" class="btn btn-primary"><i class="lni lni-printer"></i>View Result</a>
                                                 @endisset
+                                            </div>
+                                            <div class="d-grid col-3 ms-3">
+                                                <a class="btn btn-warning fw-bold" href="{{ route('student.indentity.card', Crypt::encrypt($student->id)) }}">Generate ID Card</a>
                                             </div>
                                         </div>
                                     </form>

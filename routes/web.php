@@ -23,6 +23,10 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('/storage', function () {
+    Artisan::call('storage:link');
+});
+
 Auth::routes(['register' => false]);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function () {
    Route::resource('dashboard', AdminController::class);
@@ -40,4 +44,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
    Route::get('student/migration-certificate/{id}', [StudentController::class,'getMigrationCertificate'])->name('student.certificate');
    Route::post('student/migration-certificate', [StudentController::class,'setMigrationCertificate'])->name('student.certificate.store');
    Route::get('student/migration-certificate/view/{id}', [PDFController::class, 'generateTransferCertifcate'])->name('student.certificate.view');
+   Route::get('student/indentity-card/view/{id}', [PDFController::class, 'getIdentityCard'])->name('student.indentity.card');
 });

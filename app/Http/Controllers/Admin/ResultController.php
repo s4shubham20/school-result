@@ -39,7 +39,7 @@ class ResultController extends Controller
             'holiday_assignment'            => 'required',
             'subject_id.*'                  => 'required',
             'semester1.*'                   => [
-                'required',
+                'nullable',
                 function ($attribute, $value, $fail) {
                     if (!is_numeric($value) && !is_string($value)) {
                         $fail("$attribute must be a positive number or a string.");
@@ -51,7 +51,7 @@ class ResultController extends Controller
                 }
             ],
             'semester2.*'   => [
-                'required',
+                'nullable',
                 function ($attribute, $value, $fail) {
                     if (!is_numeric($value) && !is_string($value)) {
                         $fail("$attribute must be a positive number or a string.");
@@ -63,7 +63,7 @@ class ResultController extends Controller
                 }
             ],
             'periodic_test1.*'    => [
-                'required',
+                'nullable',
                 function ($attribute, $value, $fail) {
                     if (!is_numeric($value) && !is_string($value)) {
                         $fail("$attribute must be a positive number or a string.");
@@ -75,7 +75,7 @@ class ResultController extends Controller
                 }
             ],
             'periodic_test2.*'    => [
-                'required',
+                'nullable',
                 function ($attribute, $value, $fail) {
                     if (!is_numeric($value) && !is_string($value)) {
                         $fail("$attribute must be a positive number or a string.");
@@ -108,6 +108,8 @@ class ResultController extends Controller
         $student->holiday_assignment            = $request->holiday_assignment;
         $student->totalmarks                    = $request->totalmarks;
         $student->remarks                       = $request->remarks;
+        $student->result_status                 = $request->result_status;
+        $student->rank_in_class                 = $request->rank_in_class;
         $student->save();
         return redirect()->back()->with('success', 'You have successfully add marks!');
 

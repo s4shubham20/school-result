@@ -17,13 +17,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::latest('rank_in_class')->get();
-        $rank = 1;
-        foreach($students as $key => $student){
-            $student->rank_in_class = $rank;
-            $student->save();
-            $rank++;
-        }
+        $students = Student::latest('id')->get();
+        // $rank = 1;
+        // foreach($students as $key => $student){
+        //     $student->rank_in_class = $rank;
+        //     $student->save();
+        //     $rank++;
+        // }
         return view('admin.student.index', compact("students"));
     }
 
@@ -49,8 +49,10 @@ class StudentController extends Controller
             "mother_name"   => "required",
             "dob"           => "required",
             "course_fee"    => "required|numeric|gt:0",
-            "profile_pic"   => "required|image|mimes:jpeg,jpg,png|max:200",
+            "profile_pic"   => "image|mimes:jpeg,jpg,png|max:200",
             "address"       => "required",
+            "school_name"   => "required",
+            "school_code"   => "required",
         ]);
         if ($request->hasFile('profile_pic')) {
             $file           = $request->file('profile_pic');
@@ -63,6 +65,7 @@ class StudentController extends Controller
         } else {
             $saveImage      = null;
         }
+        // return $request;
         $data                   =   $request->all();
         $data['profile_pic']    =   $saveImage;
         Student::create($data);
@@ -104,6 +107,8 @@ class StudentController extends Controller
             "profile_pic"   => "mimes:jpeg,jpg,png|max:200",
             "course_fee"    => "required|numeric|gt:0",
             "address"       => "required",
+            "school_name"   => "required",
+            "school_code"   => "required",
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();

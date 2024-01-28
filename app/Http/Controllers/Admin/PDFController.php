@@ -14,14 +14,17 @@ class PDFController extends Controller
     {
         $id         =   Crypt::decrypt($eid);
         $student    =   Student::findOrFail($id);
-        $subjects   =   Subject::all();
-        $marks      =   Mark::where('student_id',$id)->get();
+        $subjects   =   Subject::whereHas('marks', function ($query) use ($id) {
+            $query->where('student_id', $id)->whereNotNull('semester1');
+        })->with(['marks' => function ($query) use ($id) {
+            $query->where('student_id', $id);
+        }])->get();
+        $marks      =   Mark::whereNotNull('semester1')->where('student_id',$id)->get();
         $pdf        =   pdf::loadView('admin.pdf.resultpdf',
                         [   'student'   => $student ,
                             'marks'     => $marks ,
                             'subjects'  => $subjects
                         ]);
-        $pdf->set_option('isHtml5ParserEnabled', true);
         return $pdf->stream('invoice.pdf');
     }
 
@@ -41,6 +44,17 @@ class PDFController extends Controller
         // return view('admin.pdf.migration-certificate', compact('student'));
         $pdf        = pdf::loadView('admin.pdf.migration-certificate', compact('student'));
         $pdf->set_option('isHtml5ParserEnabled', true);
-        return $pdf->stream('fee-receipt.pdf');
+        return $pdf->stream('transfer-certificate.pdf');
+    }
+
+    public function getIdentityCard($eid)
+    {
+        $id         =   Crypt::decrypt($eid);
+        $student    =   Student::findOrFail($id);
+        // return view('admin.pdf.identity-card', compact('student'));
+        $customPaper = array(0,0,403,403);
+        $pdf        = pdf::loadView('admin.pdf.identity-card', compact('student'))->setPaper($customPaper, 'landscape');
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        return $pdf->stream('identity-card.pdf');
     }
 }

@@ -6,9 +6,19 @@
     <title>Scholar's Register & Transfer Certificate Form</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
+    <style>
+        #bgImage::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("{{ storage_path('app/public/result-icon/gautam-buddha.png') }}") no-repeat center center;
+            opacity: 0.15;
+            z-index: -1;
+        }
+    </style>
 </head>
-<body>
+<body id="bgImage" class="d-flex justify-content-center align-items-self">
     <table style="width: 100%;" class="mt-4">
         <tr style="width: 100%;" class="mt-3" style="border: 1px groove black; border-bottom: 0px;">
             <td style="width:100%; font-size: 15.5px;" class="px-1">
@@ -51,7 +61,7 @@
                                 <span class="fw-bold mb-1">
                                     College Code:
                                 </span>
-                                541640
+                                {{ $student->school_code }}
                             </p>
                         </td>
                     </tr>
@@ -63,11 +73,16 @@
                 <h1 class="fw-bold m-0 my-2">Scholar's Register & Transfer Certificate Form</h1>
             </td>
         </tr>
+        <tr class="text-center" style="border: 1px groove black;">
+           <td class="p-1">
+                <h4 class="text-capitalize m-0">madhyamik shiksha parishad prayagraj uttar pradesh</h4>
+            </td>
+        </tr>
         <tr style="border: 1px groove black; border-bottom: 0px;">
             <td class="p-1" style="font-size: 15px;">
                 <p class="m-0 p-0" style="font-size: 15.5px;">
                     <span class="fw-bold">Name of Institution:</span>
-                    Shree Heera Lal Intermediate College Kursinda Gotani Kunda Praptapgarh U.P. 230202
+                    {{ $student->school_name }} Kursinda Gotani Kunda Praptapgarh U.P. 230202
                 </p>
             </td>
         </tr>
@@ -237,6 +252,18 @@
         <tr style="font-size:14px; width:100%; border: 1px groove black; border-bottom: 2px groove black;">
             <td colspan="8" class="px-1" style="height: 30px;">
                 Certified that the above Scholar's has been posted up to date of the Scholar's leaving as required by the department rules.
+            </td>
+        </tr>
+        <tr style="font-size:14px; width:100%; border: 1px groove black; border-bottom: 2px groove black;">
+            <td colspan="4" class="px-1 text-start">
+                <p class="m-0 p-0">
+                    <span class="fw-bold">Contact us:</span>
+                    (+91)770-303-1714, 998-490-9463
+                </p>
+            </td>
+            <td colspan="4" class="p-1 text-end">
+                <p class="m-0 p-0"><a href="https://shreehlic.in/">https://shreehlic.in/</a>
+                </p>
             </td>
         </tr>
     </table>

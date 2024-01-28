@@ -22,11 +22,15 @@ class Student extends Model
         "address",
         "profile_pic",
         'attendance',
+        'result_status',
         'sports_cultural_activities',
         'punctual_activities',
         'holiday_assignment',
         'totalmarks',
-        'remarks'
+        'remarks',
+        'mobile',
+        'school_name',
+        'school_code',
     ];
 
     public function marks()

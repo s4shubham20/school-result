@@ -30,20 +30,43 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
+                                <label for="school_name" class="form-label">School Name<span class="text-danger fs-4">*</span></label>
+                                <select name="school_name" id="school_name" class="form-select @error('school_name') is-invalid @enderror">
+                                    <option value="H.L.S. Public School" {{ old('school_name') == "H.L.S. Public School" ? "selected":"" }}>H.L.S. Public School</option>
+                                    <option value="Shree Heera Lal Intermediate College" {{ old('school_name') == 'Shree Heera Lal Intermediate College'? "selected":""  }}>Shree Heera Lal Intermediate College</option>
+                                </select>
+                            </div>
+                            @error('school_name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <div class="col-md-6">
+                                <label for="school_code" class="form-label">School Code<span class="text-danger fs-4">*</span></label>
+                                <select name="school_code" id="school_code" class="form-select @error('school_code') is-invalid @enderror">
+                                    <option value="E0062" {{ old('school_code') == "E0062" ? "selected":"" }}>E0062</option>
+                                    <option value="541640" {{ old('school_code') == '541640'? "selected":"" }}>541640</option>
+                                </select>
+                            </div>
+                            @error('school_code')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <div class="col-md-6">
                                 <label for="class" class="form-label">Student Class<span class="text-danger fs-4">*</span></label>
                                 <select name="class" id="class" class="form-select @error('class') is-invalid @enderror">
-                                    <option value="1" {{ old('class') == 1 ? "selected":"" }}>1st</option>
-                                    <option value="2" {{ old('class') == 2 ? "selected":"" }}>2nd</option>
-                                    <option value="3" {{ old('class') == 3 ? "selected":"" }}>3rd</option>
-                                    <option value="4" {{ old('class') == 4 ? "selected":"" }}>4th</option>
-                                    <option value="5" {{ old('class') == 5 ? "selected":"" }}>5th</option>
-                                    <option value="6" {{ old('class') == 6 ? "selected":"" }}>6th</option>
-                                    <option value="7" {{ old('class') == 7 ? "selected":"" }}>7th</option>
-                                    <option value="8" {{ old('class') == 8 ? "selected":"" }}>8th</option>
-                                    <option value="9" {{ old('class') == 9 ? "selected":"" }}>9th</option>
-                                    <option value="10" {{ old('class') == 10 ? "selected":"" }}>10th</option>
-                                    <option value="11" {{ old('class') == 11 ? "selected":"" }}>11th</option>
-                                    <option value="12" {{ old('class') == 12 ? "selected":"" }}>12th</option>
+                                    <option value="Nursery" {{ old('class' == "Nursery" ? "selected":"") }}>Nursery</option>
+                                    <option value="LKG" {{ old('class') == "LKG" ? "selected":"" }}>LKG</option>
+                                    <option value="UKG" {{ old('class') == "UKG" ? "selected":"" }}>UKG</option>
+                                    <option value="1st" {{ old('class') == "1st" ? "selected":"" }}>1st</option>
+                                    <option value="2nd" {{ old('class') == "2nd" ? "selected":"" }}>2nd</option>
+                                    <option value="3rd" {{ old('class') == "3rd" ? "selected":"" }}>3rd</option>
+                                    <option value="4th" {{ old('class') == "4th" ? "selected":"" }}>4th</option>
+                                    <option value="5th" {{ old('class') == "5th" ? "selected":"" }}>5th</option>
+                                    <option value="6th" {{ old('class') == "6th" ? "selected":"" }}>6th</option>
+                                    <option value="7th" {{ old('class') == "7th" ? "selected":"" }}>7th</option>
+                                    <option value="8th" {{ old('class') == "8th" ? "selected":"" }}>8th</option>
+                                    <option value="9th" {{ old('class') == "9th" ? "selected":"" }}>9th</option>
+                                    <option value="10th" {{ old('class') == "10th" ? "selected":"" }}>10th</option>
+                                    <option value="11th" {{ old('class') == "11th" ? "selected":"" }}>11th</option>
+                                    <option value="12th" {{ old('class') == "12th" ? "selected":"" }}>12th</option>
                                 </select>
                                 @error('class')
                                     <span class="text-danger">{{ $message }}</span>
@@ -56,17 +79,24 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="father_name" class="form-label">Father Name<span class="text-danger fs-4">*</span></label>
                                 <input type="text" class="form-control @error('father_name') is-invalid @enderror" id="father_name" name="father_name" placeholder="Enter father name here!" value="{{ old('father_name') }}"/>
                                 @error('father_name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="mother_name" class="form-label">Mother Name<span class="text-danger fs-4">*</span></label>
                                 <input type="text" class="form-control @error('mother_name') is-invalid @enderror" id="mother_name" name="mother_name" placeholder="Enter mother name here!" value="{{ old('mother_name') }}"/>
                                 @error('mother_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <label for="mobile" class="form-label">Mobile No.<span class="text-danger fs-4">*</span></label>
+                                <input type="text" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" placeholder="Enter mobile no. here!" value="{{ old('mobile') }}"/>
+                                @error('mobile')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('sports_cultural_activities')->nullable();
             $table->string('punctual_activities')->nullable();
             $table->string('holiday_assignment')->nullable();
+            $table->string('mobile')->nullable();
             $table->timestamps('');
             $table->softDeletes();
         });

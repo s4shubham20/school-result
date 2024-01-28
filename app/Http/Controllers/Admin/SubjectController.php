@@ -74,6 +74,8 @@ class SubjectController extends Controller
      */
     public function destroy(string $eid)
     {
-        //
+        $id = Crypt::decrypt($eid);
+        Subject::destroy($id);
+        return redirect()->back()->with('success','Successfully Deleted!');
     }
 }

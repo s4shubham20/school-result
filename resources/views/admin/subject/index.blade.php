@@ -28,6 +28,11 @@
                                             <td>
                                                 <div class="d-flex">
                                                     <a href="{{ route('subject.edit',Crypt::encrypt($item->id)) }}" class="btn btn-info text-light"><i class="bx bx-edit"></i></a>
+                                                    <form action="{{ route('subject.destroy', Crypt::encrypt($item->id)) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger ms-1" id="deleteAlert"><i class="bx bx-trash"></i></button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
